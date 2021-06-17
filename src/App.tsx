@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { fetchData } from "./utils/fetchData";
+import Card from "./components/Card";
 
 interface LocationI {
   longitude: string | null;
