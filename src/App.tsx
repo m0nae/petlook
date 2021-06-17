@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-// import axios from "axios";
-import logo from "./logo.svg";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
-const axios = require("axios");
+import { fetchData } from "./utils/fetchData";
 
 interface LocationI {
   longitude: string | null;
@@ -52,47 +50,37 @@ function App() {
   }, []);
 
   const handleSearch = (e: any) => {
-    let token: string | undefined = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("token="))!
-      .split("=")[1];
-
     e.preventDefault();
-    axios({
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_BEARER_TOKE}`,
-      },
-      url: "https://api.petfinder.com/v2/animals",
-      params: {
-        location: `${parseFloat(location.latitude!).toString()}, ${parseFloat(
-          location.longitude!
-        ).toString()}`,
-      },
-    })
-      .then((data: any) => console.log(data))
-      .catch((err: any) => {
-        let cookie = document.cookie
-          .split(";")
-          .some((item) => item.trim().startsWith("token="));
-        if (!cookie) {
-          axios({
-            method: "post",
-            url: "https://api.petfinder.com/v2/oauth2/token",
-            data: {
-              grant_type: "client_credentials",
-              client_id: process.env.REACT_APP_API_KEY,
-              client_secret: process.env.REACT_APP_API_SECRET,
-            },
-          }).then((data: any) => {
-            let expiry: number = data.data.expires_in;
-            let accessToken: string = data.data.access_token;
-            document.cookie = `token=${accessToken}; SameSite=None; max-age=${
-              expiry - 100
-            }; Secure`;
-          });
+    fetchData(location)
+      .then((data) => setData(data.data))
+      .catch((err) => console.log(err));
+  };
+
+  
+  const animalList = () => {
+    if (data.animals.length > 1) {
+      return data.animals.map((animal: any) => (
+        <Card
+          key={animal.id}
+          image={
+            animal.photos[0]
+              ? animal.photos[0].large
+              : "https://via.placeholder.com/480x325"
+          }
+          name={animal.name}
+          info={{
+            breed: `${
+              animal.breeds.primary ? animal.breeds.primary : "Unknown"
+            } ${animal.breeds.mixed ? "Mix" : ""}`,
+            age: animal.age,
+            gender: animal.gender,
+          }}
+          setIsOpen={setIsOpen}
+        />
+      ));
+    } else {
+      return "Nothing here yet";
         }
-      });
   };
 
   return (
@@ -116,6 +104,7 @@ function App() {
         </button>
       </form>
         <div className="grid tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          {animalList()}
     </div>
       </div>
   );
