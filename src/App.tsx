@@ -9,7 +9,14 @@ interface LocationI {
   latitude: string | null;
 }
 
+interface DataI {
+  animals: [];
+}
+
 function App() {
+  const [data, setData] = useState<DataI>({
+    animals: [],
+  });
   const [location, setLocation] = useState<LocationI>({
     longitude: null,
     latitude: null,
@@ -89,8 +96,7 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div>Currently selected species: {selectedSpecies} </div>
+      <div className="App min-h-screen min-w-screen font-Poppins py-10 mx-[7%]">
       <form>
         <select
           name="species"
@@ -109,7 +115,9 @@ function App() {
           Find
         </button>
       </form>
+        <div className="grid tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
     </div>
+      </div>
   );
 }
 
