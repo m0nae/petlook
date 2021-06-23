@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  ReactChildren,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "./App.css";
 import { fetchData } from "./utils/fetchData";
 import Card from "./components/Card";
@@ -87,18 +93,22 @@ function App() {
   return (
       <div className="App min-h-screen min-w-screen font-Poppins py-10 mx-[7%]">
       <form>
-        <select
-          name="species"
-          id="species"
-          onChange={(e) => setSelectedSpecies(e.currentTarget.value)}
-        >
-          <option value="Dog">Dog</option>
-          <option value="Cat">Cat</option>
-          <option value="Bird">Bird</option>
-          <option value="Rabbit">Rabbit</option>
-          <option value="Horse">Horse</option>
-          <option value="Reptile">Reptile</option>
-        </select>
+          <SearchOptionContainer>
+            <Option
+              label="Species"
+              option={{
+                optionName: "dog",
+                value: "Doggo",
+              }}
+              searchType="species"
+            />
+            <Option label="Age" searchType="age" />
+            <Option label="Size" searchType="size" />
+            <Option label="Gender" searchType="gender" />
+            <Option label="Good With" searchType="goodWith" />
+            <Option label="Environment" searchType="environment" />
+            <RangeSlider />
+          </SearchOptionContainer>
         <input type="text" placeholder="Search for a breed" />
         <button type="submit" onClick={(e) => handleSearch(e)}>
           Find
@@ -109,6 +119,14 @@ function App() {
     </div>
       </div>
   );
+}
+
+type SearchOptionContainerProps = {
+  children: ReactNode;
+};
+
+function SearchOptionContainer({ children }: SearchOptionContainerProps) {
+  return <div className="md:flex">{children}</div>;
 }
 
 export default App;
