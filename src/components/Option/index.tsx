@@ -16,7 +16,7 @@ export default function Option({ searchType, option, label }: OptionPropTypes) {
   // let [options, setOptions] = useState([]);
   useEffect(() => {
     parseSearchOptions(searchType);
-  }, []);
+  }, [searchType]);
 
   function optionsList() {
     return parseSearchOptions(searchType, option);
