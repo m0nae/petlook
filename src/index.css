@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.animated-switch {
+  position: relative;
+}
+
+.animated-switch > div {
+  position: absolute;
+}
+
+#miles-filter-container {
+  position: relative;
+  display: inline-block;
+}
+
+#miles-filter-container::after {
+  content: "miles";
+  font-weight: 400;
+  position: absolute;
+  top: 0px;
+  right: 0.9em;
+}
