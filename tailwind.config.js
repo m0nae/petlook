@@ -13,6 +13,10 @@ module.exports = {
         tablet: { min: "440px", max: "639px" },
         default: { max: "639px" },
       },
+      boxShadow: {
+        btn: "0px 6px 0px #b8b8b8",
+        active: "0px 3px 0px #1da32c",
+      },
     },
   },
   variants: {
