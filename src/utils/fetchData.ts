@@ -1,8 +1,49 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { LocationI } from "../contexts/SearchData";
 import { getToken } from "./authToken";
 
-export async function fetchData(location: any) {
+export async function fetchData(
+  location: LocationI,
+  species: any,
+  distance?: number
+) {
   let token = await getToken();
+
+  localStorage.setItem("lastSearchLocation", JSON.stringify(location));
+
+  const parsedLocation = () => {
+    if (
+      location.coordinates &&
+      location.coordinates.longitude &&
+      location.coordinates.latitude
+    ) {
+      return `${parseFloat(
+        location.coordinates!.latitude!
+      ).toString()}, ${parseFloat(
+        location.coordinates!.longitude!
+      ).toString()}`;
+    } else if (typeof location.custom === "number") {
+      return Math.trunc(location.custom);
+    } else if (typeof location.custom === "string") {
+      if (location.custom.includes(",")) {
+        let splitLocation = location.custom.trim().split(",");
+        return `${splitLocation[0].trim()}, ${splitLocation[1].trim()}`;
+      }
+      return location.custom.trim().replace(/\W+/g, "-").toLowerCase();
+    } else {
+      return null;
+    }
+  };
+
+  const selectedSpecies = () => {
+    if (species.value === "small & furry") {
+      return "small-furry";
+    } else if (species.value === "scales, fins, & other") {
+      return "scales-fins-other";
+    } else {
+      return species.value;
+    }
+  };
 
   let options: AxiosRequestConfig = {
     method: "get",
@@ -11,20 +52,11 @@ export async function fetchData(location: any) {
     },
     url: "https://api.petfinder.com/v2/animals",
     params: {
-      location: `${parseFloat(location.latitude!).toString()}, ${parseFloat(
-        location.longitude!
-      ).toString()}`,
+      location: parsedLocation(),
+      type: selectedSpecies(),
+      distance: distance ?? 100,
     },
   };
 
-  if (
-    location.longitude &&
-    location.latitude &&
-    (!isNaN(location.longitude) || !isNaN(location.latitude))
-  ) {
-    return await axios(options);
-  } else {
-    let { params, ...rest } = options;
-    return await axios(rest);
-  }
+  return await axios(options);
 }
