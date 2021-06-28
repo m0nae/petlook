@@ -58,6 +58,12 @@ export type OptionProps = {
   };
 };
 
+export interface OptionPropTypes {
+  searchType: SearchOptionTypes.ALL_OPTIONS;
+  label: string;
+  option?: OptionProps["option"];
+}
+
 export const propTypes = {
   searchType: PropTypes.oneOf<SearchOptionTypes.ALL_OPTIONS>([
     "species",
