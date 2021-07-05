@@ -2,11 +2,25 @@ import axios, { AxiosRequestConfig } from "axios";
 import { LocationI } from "../contexts/SearchData";
 import { getToken } from "./authToken";
 
+// maybe have this entire thing be a default export
+// and then have the functions WITHIN it be individ
+// exports, just so this whole thing can be
+// more modular and easier to test
+// todo: make into a default export & export methods inside
 export async function fetchData(
   location: LocationI,
   species: any,
   distance?: number
 ) {
+  if (
+    location === null ||
+    location === undefined ||
+    JSON.stringify(location.coordinates!) === "{}" ||
+    (location.custom as string) === ""
+  ) {
+    return;
+  }
+
   let token = await getToken();
 
   localStorage.setItem("lastSearchLocation", JSON.stringify(location));
