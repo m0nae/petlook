@@ -43,7 +43,7 @@ export default function Select() {
       case "small & furry":
         return hamsterIcon;
       default:
-        break;
+        return dogFace;
     }
   };
 
