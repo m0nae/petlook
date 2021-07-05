@@ -50,7 +50,7 @@ export default function Select() {
   let parsedSpecies = species.map((animal) => {
     switch (animal) {
       case "barnyard":
-        return { label: "Barnyarn Animals", value: "barnyard" };
+        return { label: "Barnyard Animals", value: "barnyard" };
       case "small & furry":
         return {
           label: "Small & Furries",
