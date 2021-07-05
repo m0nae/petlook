@@ -16,6 +16,8 @@ module.exports = {
       boxShadow: {
         btn: "0px 6px 0px #b8b8b8",
         active: "0px 3px 0px #1da32c",
+        landing: "0px 14px 0px #579ebd",
+        landingActive: "0px 6px 0px #579ebd",
       },
     },
   },
