@@ -4,6 +4,7 @@ import Search from "./pages/Search";
 import SelectSpecies from "./pages/SelectSpecies";
 import { SearchDataProvider } from "./contexts/SearchData";
 import SelectLocation from "./pages/SelectLocation";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             <SelectSpecies />
           </Route>
           <Route path="/">
-            <div>Landing Page</div>
+            <Landing />
           </Route>
         </Switch>
       </Router>
