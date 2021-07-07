@@ -9,7 +9,8 @@ module.exports = {
       },
       screens: {
         tiny: { max: "320px" },
-        mobile: { max: "440px" },
+        mobileMax: { max: "440px" },
+        mobile: { min: "440px" },
         tablet: { min: "440px", max: "639px" },
         default: { max: "639px" },
       },
