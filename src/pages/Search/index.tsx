@@ -52,13 +52,6 @@ export default function Search() {
         (city as string[]).forEach((word) => capitalizeFirstLetter(word));
 
         //  TODO: capitalize the text
-        console.log(capitalizeFirstLetter(city[0]));
-        // parsedValue.forEach((section: string) => {
-        //   let words: string | string[] = section.split(" ");
-        //   console.log(words);
-        //   words.forEach((word) => capitalizeFirstLetter(word));
-        //   words = words.join(" ");
-        // });
         return city;
       } else {
         return value;

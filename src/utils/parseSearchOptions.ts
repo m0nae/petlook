@@ -33,14 +33,6 @@ export const searchOptions = {
   environment,
 };
 
-// export function changeLabel(label: PropsI['label']) {
-//   if (!label) {
-//     return;
-//   } else {
-//     return
-//   }
-// }
-
 export function parseSearchOptions(
   type: T.ALL_OPTIONS,
   option?: OptionProps["option"]
