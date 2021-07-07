@@ -25,7 +25,7 @@ export default function Card({
   return (
     <>
       <div className="p-2 hover:cursor-pointer" onClick={() => handleClick()}>
-        <div className="mobile:w-[80vw] tablet:w-[40vw] lg:max-w-sm xl:max-w-lg rounded-xl overflow-hidden border-2 border-gray-100">
+        <div className="mobileMax:w-[80vw] tablet:w-[40vw] lg:max-w-sm xl:max-w-lg rounded-xl overflow-hidden border-2 border-gray-100">
           <img
             className="w-full object-cover h-[70vw] tablet:h-[265px] sm:h-[220px] md:h-[200px] lg:max-h-[150px] lg:min-h-[150px] xl:max-h-[225px] 2xl:min-h-[250px]"
             src={image}
