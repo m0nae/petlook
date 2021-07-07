@@ -9,10 +9,18 @@ describe("the capitalizeFirstLetter function", () => {
     expect(str).toBe("Hello");
   });
 
-  it("should capitalize the first letter of multiple words", () => {
+  it("should capitalize the first letter of two words", () => {
     let str = capitalizeFirstLetter("hello world");
 
     expect(str).toBe("Hello World");
+  });
+
+  it("should capitalize the first letter of multiple words", () => {
+    let str = capitalizeFirstLetter(
+      "the quick brown fox jumped over the lazy dog"
+    );
+
+    expect(str).toBe("The Quick Brown Fox Jumped Over The Lazy Dog");
   });
 
   it("should capitalize the first letter of every word even if a word is already capitalized", () => {
