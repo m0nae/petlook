@@ -70,14 +70,17 @@ export default function SelectLocation() {
   return (
     <>
       <div className="relative min-h-screen min-w-full bg-gradient-to-r from-purple-600 to-purple-700 font-Poppins">
-        <div id="select-location-container" className="pt-[20vh] mx-[20%]">
-          <h1 className="text-6xl font-semibold text-white text-center">
+        <div
+          id="select-location-container"
+          className="pt-[10vh] mx-[10%] lg:pt-[20vh] sm:mx-[20%]"
+        >
+          <h1 className="text-5xl sm:text-6xl font-semibold text-white text-center">
             Choose a Location
           </h1>
-          <div className="flex justify-center mt-7">
+          <div className="flex justify-center sm:mt-7">
             <div
               id="location-input-container"
-              className="flex w-[80%] h-[85px] rounded-md bg-white mt-[10vh]"
+              className="flex w-full sm:w-[80%] h-[85px] rounded-md bg-white mt-[10vh]"
             >
               <LocationIcon customClass="h-16 w-16 self-center text-red-600 ml-3" />
               <LocationInput
@@ -90,7 +93,7 @@ export default function SelectLocation() {
           </div>
           <div
             id="location-nav-container"
-            className="absolute w-[60%] bottom-[17.4vh]"
+            className="mt-[20vh] sm:absolute w-[60%] sm:bottom-[17.4vh]"
           >
             <div className="flex justify-between">
               <Link
@@ -123,7 +126,7 @@ interface LocationIconProps {
   customClass: string;
 }
 
-function LocationIcon({ customClass }: LocationIconProps) {
+export function LocationIcon({ customClass }: LocationIconProps) {
   return (
     <>
       <svg

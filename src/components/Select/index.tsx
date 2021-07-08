@@ -82,7 +82,7 @@ export default function Select() {
       )}
       <select
         name="species"
-        className="w-[200px] border-none mr-3"
+        className="w-[200px] border-none text-xl rounded-sm pl-2 mr-3 bg-purple-600 text-white focus-within:text-black focus-within:bg-white"
         onChange={(e) => {
           let selected = e.target.value;
 

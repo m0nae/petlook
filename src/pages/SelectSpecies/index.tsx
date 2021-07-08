@@ -29,13 +29,16 @@ export default function SelectSpecies() {
   return (
     <>
       <div className="min-h-screen min-w-full bg-gradient-to-r from-purple-600 to-purple-700 font-Poppins">
-        <div id="select-species-container" className="pt-[20vh] mx-[20%]">
+        <div
+          id="select-species-container"
+          className="pt-[10vh] pb-[10vh] lg:pt-[20vh] mx-[10%] md:mx-[20%] max-w-screen-lg"
+        >
           <h1 className="text-6xl font-semibold text-white text-center">
             Select a species
           </h1>
           <div
             id="select-species-options"
-            className="grid mt-6 gap-10 gap-y-5 grid-cols-2"
+            className="flex flex-col lg:grid lg:gap-10 lg:gap-y-5 lg:grid-cols-2 mt-6"
           >
             <Selection
               selectionName="dog"
@@ -91,11 +94,11 @@ export default function SelectSpecies() {
               Back
             </NavBtn>
             <NavBtn
-                to="/select-location"
+              to="/select-location"
               direction="forward"
               disabled={nextDisabled()}
-              >
-                Next
+            >
+              Next
             </NavBtn>
           </div>
         </div>
@@ -123,7 +126,7 @@ export function Selection({
   return (
     <>
       <div
-        className={`transform group flex h-24 w-full rounded-md text-2xl px-[10%] items-center font-semibold hover:cursor-pointer transition-all duration-100 ${
+        className={`transform group mb-5 lg:mb-0 flex h-24 w-full rounded-md text-2xl px-[10%] items-center font-semibold hover:cursor-pointer transition-all duration-100 ${
           selectedSpecies.value === selectionName
             ? "bg-[#55d862] text-white shadow-active translate-y-1"
             : "bg-white shadow-btn"
@@ -133,8 +136,9 @@ export function Selection({
       >
         <Icon
           icon={icon.element}
-          height={icon.height ?? "3rem"}
-          className="mr-[4rem] ml-7"
+          height="3rem"
+          width="3rem"
+          className="mr-[1rem] mobile:mr-[2rem] sm:mr-[4rem] ml-7 min-h-[2.5rem] max-h-[2.5rem] max-w-[2.5rem] min-w-[2.5rem] mobile:min-h-[3rem] mobile:min-w-[3rem]"
         />{" "}
         <label
           htmlFor="selection"
