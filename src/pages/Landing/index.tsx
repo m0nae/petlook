@@ -27,7 +27,7 @@ export default function Landing() {
             </Link>
           </div>
         </div>
-        <footer className="text-gray-600 body-font fixed w-full mt-16 bottom-0 bg-white">
+        <footer className="text-gray-600 body-font static w-full mt-16 bottom-0 bg-white">
           <div className="container px-5 py-8 mx-auto flex items-center justify-between sm:flex-row flex-col">
             <a
               href="http://localhost:3000"

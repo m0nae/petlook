@@ -33,7 +33,7 @@ export default function AnimalList({ setSelectedPetId, setIsOpen, ctx }: any) {
           />
         ))
       ) : (
-        <p className="mt-[5vh] text-2xl font-medium col-span-full">
+        <p className="mt-[3vh] text-2xl font-medium col-span-full">
           There are no results.
         </p>
       )}
