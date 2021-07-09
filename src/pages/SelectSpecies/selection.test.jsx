@@ -1,6 +1,6 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen, fireEvent, userEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import SelectSpecies, { Selection } from "./index";
 import { SearchDataProvider } from "../../contexts/SearchData";
@@ -20,7 +20,7 @@ function renderUI(text) {
   );
 }
 
-describe("'Select Species' page interactivity", () => {
+describe("the 'Select Species' page", () => {
   beforeEach(() => {
     renderUI(
       <Router>
@@ -29,35 +29,37 @@ describe("'Select Species' page interactivity", () => {
     );
   });
 
-  test("Back button renders and is enabled", () => {
-    expect(screen.getByRole("link", { name: "Back" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Back" })).not.toBeDisabled();
+  describe("the back button", () => {
+    it("should render", () => {
+      expect(screen.getByRole("link", { name: "Back" })).toBeInTheDocument();
+    });
+
+    it("should be disabled initially", () => {
+      expect(screen.getByRole("link", { name: "Back" })).not.toBeDisabled();
+    });
   });
 
-  test("Next button is disabled by default/when no species is selected", () => {
-    expect(screen.getByRole("button")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toBeDisabled();
+  describe("the next button", () => {
+    it("should be disabled by default/when no species is selected", () => {
+      expect(screen.getByRole("button")).toBeInTheDocument();
+      expect(screen.getByRole("button")).toBeDisabled();
+    });
+
+    it("should be enabled when a species is selected", async () => {
+      fireEvent.click(screen.getByText("Rabbit"));
+      expect(
+        await screen.findByRole("link", { name: "Next" })
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole("button", { name: "Next" })
+      ).not.toBeInTheDocument();
+    });
   });
 
-  test("When a species is selected, the next button is enabled", async () => {
-    fireEvent.click(screen.getByText("Rabbit"));
-    expect(
-      await screen.findByRole("link", { name: "Next" })
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByRole("button", { name: "Next" })
-    ).not.toBeInTheDocument();
-  });
-});
-
-describe("Selection displays the correct species names", () => {
-  test("displays Rabbit on rabbit selected species", () => {
-    renderUI("Rabbit");
-    expect(screen.getByText("Rabbit")).toBeInTheDocument();
-  });
-
-  test("displays Bunny Rabbit on rabbit selected species", () => {
-    renderUI("Bunny Rabbit");
-    expect(screen.getByText("Bunny Rabbit")).toBeInTheDocument();
+  describe("the selection 'button'", () => {
+    it("should display the text specified by the developer", () => {
+      renderUI("Bunny Rabbit");
+      expect(screen.getByText("Bunny Rabbit")).toBeInTheDocument();
+    });
   });
 });

@@ -12,7 +12,7 @@ const renderUI = (ui, { providerProps, ...renderOptions }) => {
   );
 };
 
-describe("'distance' input", () => {
+describe("the 'distance' input", () => {
   beforeEach(() => {
     renderUI(
       <Router>
@@ -22,17 +22,17 @@ describe("'distance' input", () => {
     );
   });
 
-  test("it correctly renders", () => {
+  it("should correctly render", () => {
     let input = screen.getByLabelText("Distance");
     expect(input).toBeInTheDocument();
   });
 
-  test("it renders value '100' by default", () => {
+  it("should render value of 100 by default", () => {
     let input = screen.getByLabelText("Distance");
     expect(input).toHaveValue(100);
   });
 
-  test("it changes value on user input", async () => {
+  it("should change value to user's input", async () => {
     let input = screen.getByLabelText("Distance");
 
     fireEvent.change(input, { target: { value: 300 } });
