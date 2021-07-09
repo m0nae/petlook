@@ -1,5 +1,8 @@
 import { useContext } from "react";
-import { SearchDataContext } from "../../contexts/SearchData";
+import {
+  SearchDataContext,
+  SearchDataContextValue,
+} from "../../contexts/SearchData";
 import { Icon } from "@iconify/react";
 import pigFace from "@iconify-icons/twemoji/pig-face";
 import dogFace from "@iconify-icons/twemoji/dog-face";
@@ -9,9 +12,9 @@ import birdIcon from "@iconify-icons/twemoji/bird";
 import rabbitFace from "@iconify-icons/noto/rabbit-face";
 import hamsterIcon from "@iconify-icons/noto/hamster";
 import fishIcon from "@iconify-icons/noto/fish";
-import { Link } from "react-router-dom";
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
 import NavButton from "../../components/NavButton";
+import { parsedSpecies } from "../../utils/parsedSpecies";
 
 // todo: try putting these icons into their own file, they're
 // cluttering things up
@@ -23,10 +26,15 @@ export default function SelectSpecies() {
     return selectedSpecies.value.length <= 0;
   };
 
+  // used parsedSpecies so that the pluralized version
+  // of the species is used as the "label"
+  // for the selectedSpecies state
   const handleClick = (label: string, val: T.SPECIES) => {
     searchDispatch({
       type: "setSelectedSpecies",
-      payload: { label, value: val },
+      payload: parsedSpecies.find(
+        (el) => el.value === val
+      )! as unknown as SearchDataContextValue["selectedSpecies"],
     });
   };
 

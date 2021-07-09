@@ -14,8 +14,7 @@ import rabbitFace from "@iconify-icons/noto/rabbit-face";
 import hamsterIcon from "@iconify-icons/noto/hamster";
 import fishIcon from "@iconify-icons/noto/fish";
 
-import { species } from "../../utils/parseSearchOptions";
-import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+import { parsedSpecies } from "../../utils/parsedSpecies";
 
 export default function Select() {
   const { selectedSpecies, searchDispatch } = useContext(SearchDataContext);
@@ -47,34 +46,6 @@ export default function Select() {
     }
   };
 
-  let parsedSpecies = species.map((animal) => {
-    switch (animal) {
-      case "barnyard":
-        return { label: "Barnyard Animals", value: "barnyard" };
-      case "small & furry":
-        return {
-          label: "Small & Furries",
-          value: "small & furry",
-        };
-      case "scales, fins, & other":
-        return {
-          label: "Scales, Fins, & Others",
-          value: "scales, fins, & other",
-        };
-      default:
-        break;
-    }
-
-    let str = capitalizeFirstLetter(animal)!.split("");
-    str.push("s");
-    let val = str.join("");
-
-    return {
-      label: val,
-      value: animal,
-    };
-  });
-
   return (
     <div className="flex">
       {selectedSpecies && (
@@ -92,11 +63,6 @@ export default function Select() {
               (el) => el.value === selected
             )! as unknown as SearchDataContextValue["selectedSpecies"],
           });
-          // setSelectedSpecies(
-          //   parsedSpecies.find(
-          //     (el) => el.value === selected
-          //   )! as unknown as SearchDataContextValue["selectedSpecies"]
-          // );
         }}
         defaultValue={selectedSpecies.value}
       >
