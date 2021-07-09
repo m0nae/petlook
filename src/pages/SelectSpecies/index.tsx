@@ -16,14 +16,17 @@ import { SearchOptionTypes as T } from "../../components/Option/option.types";
 // cluttering things up
 
 export default function SelectSpecies() {
-  const { selectedSpecies, setSelectedSpecies } = useContext(SearchDataContext);
+  const { selectedSpecies, searchDispatch } = useContext(SearchDataContext);
 
   const nextDisabled = () => {
     return selectedSpecies.value.length <= 0;
   };
 
   const handleClick = (label: string, val: T.SPECIES) => {
-    setSelectedSpecies({ label, value: val });
+    searchDispatch({
+      type: "setSelectedSpecies",
+      payload: { label, value: val },
+    });
   };
 
   return (
