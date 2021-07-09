@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import Card from "../Card";
+import cryingCat from "@iconify-icons/twemoji/crying-cat";
 import { SearchDataContextValue } from "../../contexts/SearchData";
+import { Icon } from "@iconify/react";
 
 // todo: give the props an actual type
 interface AnimalListProps {}
@@ -33,9 +35,12 @@ export default function AnimalList({ setSelectedPetId, setIsOpen, ctx }: any) {
           />
         ))
       ) : (
-        <p className="mt-[3vh] text-2xl font-medium col-span-full">
-          There are no results.
-        </p>
+        <div className="flex flex-col col-span-full items-center">
+          <Icon icon={cryingCat} className="h-12 w-12 mr-4" />
+          <p className="mt-[3vh] text-2xl font-medium text-center">
+            No results found.
+          </p>
+        </div>
       )}
     </>
   );
