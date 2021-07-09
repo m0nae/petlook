@@ -12,17 +12,17 @@ const renderUI = (ui, { providerProps, ...renderOptions }) => {
   );
 };
 
-describe("Species select element", () => {
+describe("the species select element", () => {
   beforeEach(() => {
     renderUI(<Select />, {});
   });
 
-  test("renders properly", () => {
+  it("should render properly", () => {
     let select = screen.getByRole("combobox");
     expect(select).toBeInTheDocument();
   });
 
-  test("displays all of the possible species as options", async () => {
+  it("should display all of the possible species as options", async () => {
     let select = screen.getByRole("combobox");
     fireEvent.click(select);
 
@@ -44,7 +44,7 @@ describe("Species select element", () => {
     possibleSpecies.forEach((animal) => expect(options).toContain(animal));
   });
 
-  test("Renders the correct icon depending on the selected species", async () => {
+  it("should render the correct icon depending on the selected species", async () => {
     let rabbitOption = screen.getByRole("option", { name: "Rabbits" });
 
     fireEvent.click(rabbitOption);
