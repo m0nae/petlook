@@ -18,7 +18,7 @@ import { species } from "../../utils/parseSearchOptions";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 
 export default function Select() {
-  const { selectedSpecies, setSelectedSpecies } = useContext(SearchDataContext);
+  const { selectedSpecies, searchDispatch } = useContext(SearchDataContext);
 
   useEffect(() => {
     chooseIcon();
@@ -86,11 +86,17 @@ export default function Select() {
         onChange={(e) => {
           let selected = e.target.value;
 
-          setSelectedSpecies(
-            parsedSpecies.find(
+          searchDispatch({
+            type: "setSelectedSpecies",
+            payload: parsedSpecies.find(
               (el) => el.value === selected
-            )! as unknown as SearchDataContextValue["selectedSpecies"]
-          );
+            )! as unknown as SearchDataContextValue["selectedSpecies"],
+          });
+          // setSelectedSpecies(
+          //   parsedSpecies.find(
+          //     (el) => el.value === selected
+          //   )! as unknown as SearchDataContextValue["selectedSpecies"]
+          // );
         }}
         defaultValue={selectedSpecies.value}
       >

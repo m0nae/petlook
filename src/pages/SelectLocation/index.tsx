@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import { SearchDataContext } from "../../contexts/SearchData";
 import { Link } from "react-router-dom";
 import LocationInput from "../../components/LocationInput";
+import { locationExists } from "../../utils/locationExists";
 
 export default function SelectLocation() {
-  const { location, setLocation } = useContext(SearchDataContext);
+  const { location, searchDispatch } = useContext(SearchDataContext);
   const [locationInput, setLocationInput] = useState("");
-  const [isInputFocused, setIsInputFocused] = useState(false);
 
   useEffect(() => {
     let userLocation = {
@@ -15,10 +15,13 @@ export default function SelectLocation() {
     };
 
     if (userLocation.longitude && userLocation.latitude) {
-      setLocation({
-        coordinates: {
-          longitude: userLocation.longitude,
-          latitude: userLocation.latitude,
+      searchDispatch({
+        type: "setLocation",
+        payload: {
+          coordinates: {
+            longitude: userLocation.longitude,
+            latitude: userLocation.latitude,
+          },
         },
       });
     }
@@ -27,28 +30,23 @@ export default function SelectLocation() {
   const nextDisabled = () => {
     if (locationInput.length > 0) {
       return false;
-    } else if (
-      location.coordinates &&
-      location.coordinates.longitude !== undefined &&
-      location.coordinates.latitude !== undefined
-    ) {
-      return false;
-    } else if (location.custom !== undefined && location.custom !== "") {
+    } else if (locationExists(location)) {
       return false;
     } else {
       return true;
     }
   };
 
-  const handleLocationInput = (e: any) => {
-    setLocationInput(e.target.value);
-
-    if (e.target.value.length > 0) {
-      setLocation({
-        custom:
-          typeof e.target.value === "string"
-            ? e.target.value.trim()
-            : e.target.value,
+  useEffect(() => {
+    if (locationInput.length > 0) {
+      searchDispatch({
+        type: "setLocation",
+        payload: {
+          custom:
+            typeof locationInput === "string"
+              ? locationInput.trim()
+              : locationInput,
+        },
       });
     } else {
       let userLocation = {
@@ -57,14 +55,21 @@ export default function SelectLocation() {
       };
 
       if (userLocation.longitude && userLocation.latitude) {
-        setLocation({
-          coordinates: {
-            longitude: userLocation.longitude,
-            latitude: userLocation.latitude,
+        searchDispatch({
+          type: "setLocation",
+          payload: {
+            coordinates: {
+              longitude: userLocation.longitude,
+              latitude: userLocation.latitude,
+            },
           },
         });
       }
     }
+  }, [locationInput]);
+
+  const handleLocationInput = (e: any) => {
+    setLocationInput(e.target.value);
   };
 
   return (

@@ -24,8 +24,8 @@ interface DataI {
   animals: [];
 }
 
-export default function Search() {
-  const { location, setLocation, distance, setDistance, selectedSpecies } =
+function SearchComponent({ handleSearch }: any) {
+  const { location, distance, selectedSpecies, error, data, searchDispatch } =
     useContext(SearchDataContext);
   const [requestMade, setRequestMade] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -115,11 +115,14 @@ export default function Search() {
     setLocationInput(e.target.value);
 
     if (e.target.value.length > 0) {
-      setLocation({
+      searchDispatch({
+        type: "setLocation",
+        payload: {
         custom:
           typeof e.target.value === "string"
             ? e.target.value.trim()
             : e.target.value,
+        },
       });
     } else {
       let userLocation = {
@@ -128,10 +131,13 @@ export default function Search() {
       };
 
       if (userLocation.longitude && userLocation.latitude) {
-        setLocation({
+        searchDispatch({
+          type: "setLocation",
+          payload: {
           coordinates: {
             longitude: userLocation.longitude,
             latitude: userLocation.latitude,
+          },
           },
         });
       } else {
@@ -141,7 +147,21 @@ export default function Search() {
           localStorage.getItem("lastSearchLocation")!
         );
 
-        setLocation(lastSearchLocation);
+        if (lastSearchLocation) {
+          searchDispatch({
+            type: "setLocation",
+            payload: lastSearchLocation.coordinates
+              ? {
+                  coordinates: {
+                    longitude: lastSearchLocation.coordinates.longitude,
+                    latitude: lastSearchLocation.coordinates.latitude,
+                  },
+      }
+              : {
+                  custom: lastSearchLocation.custom,
+                },
+          });
+        }
       }
     }
   };
@@ -218,8 +238,12 @@ export default function Search() {
                 id="miles-filter"
                 type="number"
                 value={distance}
-                className="w-[135px]"
-                onChange={(e) => setDistance(Number(e.target.value))}
+                onChange={(e) =>
+                  searchDispatch({
+                    type: "setDistance",
+                    payload: Number(e.target.value),
+                  })
+                }
               />
             </div>
             <div className="flex text-2xl self-center">

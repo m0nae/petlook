@@ -1,60 +1,82 @@
-import React, {
-  useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { createContext, useReducer } from "react";
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
+import { StateI, ActionsT, SearchDataContextValue } from "./searchData.types";
 
-export interface SearchDataContextValue {
-  location: LocationI;
-  setLocation: Dispatch<SetStateAction<LocationI>>;
-  distance: number;
-  setDistance: Dispatch<SetStateAction<number>>;
-  selectedSpecies: {
-    label: string;
-    value: T.SPECIES;
-  };
-  setSelectedSpecies: React.Dispatch<
-    React.SetStateAction<SearchDataContextValue["selectedSpecies"]>
-  >;
-}
+export * from "./searchData.types";
 
 export const SearchDataContext = createContext(
   undefined as unknown as SearchDataContextValue
 );
 
-export interface LocationI {
-  coordinates?: {
-    longitude: string | undefined;
-    latitude: string | undefined;
-  };
-  custom?: string | number | undefined;
-}
-
-export function SearchDataProvider(props: any) {
-  const [location, setLocation] = useState<LocationI>({
+const initialState: StateI = {
+  location: {
     coordinates: {
       longitude: undefined,
       latitude: undefined,
     },
     custom: undefined,
-  });
-  const [distance, setDistance] = useState(100);
-  const [selectedSpecies, setSelectedSpecies] = useState({
+  },
+  distance: 100,
+  selectedSpecies: {
     label: "",
-    value: "",
-  } as unknown as SearchDataContextValue["selectedSpecies"]);
+    value: "" as T.SPECIES,
+  },
+  data: {
+    animals: [],
+  },
+  error: false,
+};
+
+function reducer(state: typeof initialState, action: ActionsT): StateI {
+  switch (action.type) {
+    case "setLocation":
+      return {
+        ...state,
+        location: action.payload,
+      };
+
+    case "setDistance":
+      return {
+        ...state,
+        distance: Number(action.payload),
+      };
+
+    case "setSelectedSpecies":
+      return {
+        ...state,
+        selectedSpecies: action.payload,
+      };
+
+    case "setData":
+      return {
+        ...state,
+        data: action.payload,
+      };
+
+    case "setError":
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+
+export function SearchDataProvider(props: any) {
+  const [searchState, searchDispatch] = useReducer(reducer, initialState);
+  const { location, distance, selectedSpecies, data, error } = searchState;
 
   return (
     <SearchDataContext.Provider
       value={{
         location,
-        setLocation,
         distance,
-        setDistance,
         selectedSpecies,
-        setSelectedSpecies,
+        data,
+        error,
+        searchDispatch,
       }}
     >
       {props.children}
