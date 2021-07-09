@@ -3,11 +3,13 @@ import { SearchDataContext } from "../../contexts/SearchData";
 import { Link } from "react-router-dom";
 import LocationInput from "../../components/LocationInput";
 import { locationExists } from "../../utils/locationExists";
+import NavButton from "../../components/NavButton";
 
 export default function SelectLocation() {
   const { location, searchDispatch } = useContext(SearchDataContext);
   const [locationInput, setLocationInput] = useState("");
 
+  // todo: should this go in the DataFetcher HOC?
   useEffect(() => {
     let userLocation = {
       longitude: localStorage.getItem("longitude"),
@@ -74,18 +76,18 @@ export default function SelectLocation() {
 
   return (
     <>
-      <div className="relative min-h-screen min-w-full bg-gradient-to-r from-purple-600 to-purple-700 font-Poppins">
+      <div className="relative flex flex-col justify-center items-center min-h-screen min-w-full bg-gradient-to-r from-purple-600 to-purple-700 font-Poppins">
         <div
           id="select-location-container"
-          className="pt-[10vh] mx-[10%] lg:pt-[20vh] sm:mx-[20%]"
+          className="max-w-screen-lg w-[83%] md:w-[70%] lg:w-[80%]"
         >
           <h1 className="text-5xl sm:text-6xl font-semibold text-white text-center">
             Choose a Location
           </h1>
-          <div className="flex justify-center sm:mt-7">
+          <div className="flex justify-center sm:mt-4">
             <div
               id="location-input-container"
-              className="flex w-full sm:w-[80%] h-[85px] rounded-md bg-white mt-[10vh]"
+              className="flex w-full lg:w-[80%] h-[85px] rounded-md bg-white mt-[7vh]"
             >
               <LocationIcon customClass="h-16 w-16 self-center text-red-600 ml-3" />
               <LocationInput
@@ -97,29 +99,19 @@ export default function SelectLocation() {
             </div>
           </div>
           <div
-            id="location-nav-container"
-            className="mt-[20vh] sm:absolute w-[60%] sm:bottom-[17.4vh]"
+            id="nav-btn-container"
+            className="flex relative top-11 justify-between my-0 mx-auto justify-self-center mt-5 lg:w-[80%]"
           >
-            <div className="flex justify-between">
-              <Link
-                to="/select-species"
-                className="px-20 py-4 bg-blue-500 font-semibold text-white text-2xl rounded-md"
-              >
-                Back
-              </Link>
-              {nextDisabled() ? (
-                <button className="px-20 py-4 hover:cursor-default bg-gray-400 font-semibold text-white text-2xl rounded-md">
-                  Next
-                </button>
-              ) : (
-                <Link
-                  to="/search"
-                  className="px-20 py-4 bg-blue-500 font-semibold text-white text-2xl rounded-md"
-                >
-                  Next
-                </Link>
-              )}
-            </div>
+            <NavButton to="/select-species" direction="back">
+              Back
+            </NavButton>
+            <NavButton
+              to="/search"
+              direction="forward"
+              disabled={nextDisabled()}
+            >
+              Next
+            </NavButton>
           </div>
         </div>
       </div>
