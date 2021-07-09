@@ -1,38 +1,35 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  ReactNode,
-  Fragment,
-} from "react";
+import React, { useState, useContext, ReactNode, Fragment } from "react";
 import "../../index.css";
+import { Menu, Transition } from "@headlessui/react";
+import { LocationIcon } from "../SelectLocation";
+
 import Option from "../../components/Option";
-import Card from "../../components/Card";
 import Modal from "../../components/Modal";
 import Select from "../../components/Select";
-
-import { fetchData } from "../../utils/fetchData";
-
-import { SearchDataContext } from "../../contexts/SearchData";
-
-import { Menu, Transition } from "@headlessui/react";
-
 import LocationInput from "../../components/LocationInput";
+import SearchButton from "../../components/SearchButton";
+import AnimalList from "../../components/AnimalList";
+import { DataFetcher } from "../../components/DataFetcher";
+
+import { LocationI, SearchDataContext } from "../../contexts/SearchData";
+
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 
-interface DataI {
-  animals: [];
+export default DataFetcher(SearchComponent);
+
+// todo: FIX THIS, GIVE EVERYTHING A PROPER TYPE
+// AND NOT JUST "ANY"!!!
+
+interface SearchComponentProps {
+  handleSearch: () => void;
 }
 
 function SearchComponent({ handleSearch }: any) {
   const { location, distance, selectedSpecies, error, data, searchDispatch } =
     useContext(SearchDataContext);
-  const [requestMade, setRequestMade] = useState(false);
-  const [initialLoad, setInitialLoad] = useState(true);
-  const [error, setError] = useState(false);
-  const [data, setData] = useState<DataI>({
-    animals: [],
-  });
+  // const [requestMade, setRequestMade] = useState(false);
+  // const [initialLoad, setInitialLoad] = useState(true);
+  const [displayMobileSearch, setDisplayMobileSearch] = useState(false);
 
   // TODO: implement pagination
   // const [page, setPage] = useState(1);
@@ -47,7 +44,6 @@ function SearchComponent({ handleSearch }: any) {
     (key, value) => {
       if (key === "custom") {
         let parsedValue = value.trim().split(",");
-        console.log(parsedValue);
         let city: string | string[] = parsedValue[0].split(" ");
         (city as string[]).forEach((word) => capitalizeFirstLetter(word));
 
@@ -59,58 +55,6 @@ function SearchComponent({ handleSearch }: any) {
     }
   );
 
-  console.log(parsedLastSearchLocation);
-  console.log(JSON.parse(localStorage.getItem("lastSearchLocation")!));
-
-  useEffect(() => {
-    let userLocation = {
-      longitude: localStorage.getItem("longitude"),
-      latitude: localStorage.getItem("latitude"),
-    };
-
-    if (userLocation.longitude && userLocation.latitude) {
-      setLocation({
-        coordinates: {
-          longitude: userLocation.longitude,
-          latitude: userLocation.latitude,
-        },
-      });
-    } else {
-      let lastSearchLocation = JSON.parse(
-        localStorage.getItem("lastSearchLocation")!
-      );
-      setLocation(lastSearchLocation);
-    }
-  }, []);
-
-  useEffect(() => {
-    async function fetchDataWrapper() {
-      //TODO: make this into a function, I copy and pasted the exact thing from below!
-      await fetchData(location, selectedSpecies, distance)
-        .then((res: any) => {
-          setRequestMade(true);
-          console.log(res);
-          res = res.data;
-          let data: any = {
-            ...res,
-            animals: res.animals.filter(
-              (animal: any) => animal.status === "adoptable"
-            ),
-          };
-          setData(data);
-          setError(false);
-        })
-        .catch((err) => {
-          setError(true);
-        });
-    }
-
-    if (initialLoad) {
-      fetchDataWrapper();
-      setInitialLoad(false);
-    }
-  }, [location]);
-
   const handleLocationInput = (e: any) => {
     setLocationInput(e.target.value);
 
@@ -118,10 +62,10 @@ function SearchComponent({ handleSearch }: any) {
       searchDispatch({
         type: "setLocation",
         payload: {
-        custom:
-          typeof e.target.value === "string"
-            ? e.target.value.trim()
-            : e.target.value,
+          custom:
+            typeof e.target.value === "string"
+              ? e.target.value.trim()
+              : e.target.value,
         },
       });
     } else {
@@ -134,16 +78,18 @@ function SearchComponent({ handleSearch }: any) {
         searchDispatch({
           type: "setLocation",
           payload: {
-          coordinates: {
-            longitude: userLocation.longitude,
-            latitude: userLocation.latitude,
-          },
+            coordinates: {
+              longitude: userLocation.longitude,
+              latitude: userLocation.latitude,
+            },
           },
         });
       } else {
-        // TODO: put this into context as well, bc it's IMMEDIATELY needed after the user leaves the location-select page and
-        // goes here. It doesn't retrieve it fast enough, so just automatically store it in search data context too
-        let lastSearchLocation = JSON.parse(
+        // TODO: ALSO put this below logic inside a
+        // HOC/the selectLocation page too since it makes
+        // sense to add this whole thing in there,
+        // too, IF i decide to even keep this logic
+        let lastSearchLocation: LocationI = JSON.parse(
           localStorage.getItem("lastSearchLocation")!
         );
 
@@ -156,7 +102,7 @@ function SearchComponent({ handleSearch }: any) {
                     longitude: lastSearchLocation.coordinates.longitude,
                     latitude: lastSearchLocation.coordinates.latitude,
                   },
-      }
+                }
               : {
                   custom: lastSearchLocation.custom,
                 },
@@ -166,59 +112,101 @@ function SearchComponent({ handleSearch }: any) {
     }
   };
 
-  const handleSearch = async (e: any) => {
-    e.preventDefault();
-
-    await fetchData(location, selectedSpecies, distance)
-      .then((res: any) => {
-        setRequestMade(true);
-        console.log(res);
-        res = res.data;
-        let data: any = {
-          ...res,
-          animals: res.animals.filter(
-            (animal: any) => animal.status === "adoptable"
-          ),
-        };
-        setData(data);
-        setError(false);
-      })
-      .catch((err) => setError(true));
-  };
-
-  const animalList = () => {
-    if (data.animals.length >= 1) {
-      return data.animals.map((animal: any) => (
-        <Card
-          key={animal.id}
-          image={
-            animal.photos[0]
-              ? animal.photos[0].large
-              : "https://via.placeholder.com/480x325"
-          }
-          name={animal.name}
-          info={{
-            id: animal.id,
-            breed: `${
-              animal.breeds.primary ? animal.breeds.primary : "Unknown"
-            } ${animal.breeds.mixed ? "Mix" : ""}`,
-            age: animal.age,
-            gender: animal.gender,
-          }}
-          setSelectedPetId={setSelectedPetId}
-          setIsOpen={setIsOpen}
-        />
-      ));
-    } else if (data.animals.length < 1 && requestMade) {
-      return "There were no results.";
-    } else return;
-  };
-
   return (
-    <div className="App min-h-screen min-w-screen font-Poppins py-10 mx-[10%]">
-      <form>
+    <>
+      <div
+        id="mobile-search-overlay"
+        className={
+          displayMobileSearch
+            ? "flex flex-col items-center justify-center z-50 min-w-[100vw] min-h-screen bg-purple-100"
+            : "hidden"
+        }
+      >
+        <span
+          id="exit-mobile-search-display"
+          className="absolute top-3 right-4 font-extrabold hover:cursor-pointer"
+          onClick={() => setDisplayMobileSearch(false)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-10 w-10"
+            viewBox="0 0 20 20"
+            fill="#494352"
+          >
+            <path
+              fillRule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clipRule="evenodd"
+              stroke="#494352"
+              strokeWidth="1.6px"
+            />
+          </svg>
+        </span>
+        {/* todo: give Select element an option, custom className prop */}
+        <Select />
+        <div
+          id="location-input-container"
+          className="flex w-[80%] h-[85px] rounded-md bg-white mt-[10vh] shadow-sm mb-7"
+        >
+          <LocationIcon customClass="h-16 w-16 self-center text-red-600 ml-3" />
+          <LocationInput
+            locationInput={locationInput}
+            handleLocationInput={handleLocationInput}
+            defaultLocationText="Your Location"
+            className="text-3xl text-[#494352] font-medium w-full h-full ml-4 rounded-md rounded-l-none"
+          />
+        </div>
+        <SearchButton
+          type="submit"
+          onClick={() => {
+            handleSearch();
+            setDisplayMobileSearch(false);
+          }}
+          className="py-7 w-[80%] text-3xl"
+        >
+          Search
+        </SearchButton>{" "}
+      </div>
+      <div
+        className={
+          displayMobileSearch
+            ? "hidden"
+            : "App h-full min-w-screen font-Poppins pb-10 mx-[10%]"
+        }
+      >
         <SearchOptionContainer>
-          <div id="search-container" className="mr-5 flex">
+          <div
+            id="mobile-search-container"
+            className="flex items-center 1135:hidden text-white text-xl h-[80px]"
+          >
+            <p>
+              {selectedSpecies.label.length > 0
+                ? selectedSpecies.label
+                : "Dogs"}{" "}
+              {distance} miles near{" "}
+              {/* turn the below code into a fn. I use it twice, in here *and* in locationInput */}
+              {locationInput.length > 0
+                ? locationInput
+                : location.custom
+                ? location.custom
+                : "Insert Location"}
+            </p>
+            <span
+              id="pencil-icon"
+              className="hover:cursor-pointer ml-3"
+              onClick={() => setDisplayMobileSearch(true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-white"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+              </svg>
+            </span>
+          </div>
+          <div id="top-search-container" className="hidden 1135:flex">
             <div
               className="flex mr-1 items-center"
               onClick={(e) => e.preventDefault()}
@@ -227,9 +215,10 @@ function SearchComponent({ handleSearch }: any) {
                 <Select />
               </span>
             </div>
+            {/* todo: turn this into a component */}
             <div
               id="miles-filter-container"
-              className="flex text-2xl font-medium self-center"
+              className="flex text-xl font-medium self-center"
             >
               <label htmlFor="miles-filter" className="hidden">
                 Distance
@@ -238,6 +227,7 @@ function SearchComponent({ handleSearch }: any) {
                 id="miles-filter"
                 type="number"
                 value={distance}
+                className="w-[120px] p-2 rounded-sm mr-3"
                 onChange={(e) =>
                   searchDispatch({
                     type: "setDistance",
@@ -246,40 +236,56 @@ function SearchComponent({ handleSearch }: any) {
                 }
               />
             </div>
-            <div className="flex text-2xl self-center">
+          </div>
+          <div id="middle-search-container">
+            <div className="hidden 1135:flex text-xl self-center text-white items-center">
               near
-              <span className="ml-3 mr-3 self-center font-medium">
+              <span className="ml-3 mr-3 self-center font-medium text-black">
                 <LocationInput
                   defaultLocationText=""
                   handleLocationInput={handleLocationInput}
                   locationInput={locationInput}
-                  className="w-[360px]"
+                  className="w-[360px] rounded-sm p-2"
                 />
               </span>
             </div>
-            <button
-              type="submit"
-              onClick={(e) => handleSearch(e)}
-              className="px-10 py-4 bg-purple-500 font-semibold text-white text-lg rounded-md hover:bg-purple-600 transition-colors duration-150"
+          </div>
+          <div id="bottom-search-container" className="hidden 1135:flex">
+            <SearchButton
+              onClick={() => handleSearch()}
+              className="py-3 text-lg mr-4"
             >
               Search
-            </button>{" "}
-          </div>
-          <div id="filters-container" className="flex items-center">
-            <Filter />
+            </SearchButton>{" "}
+            <div id="filters-container" className="flex items-center">
+              <Filter />
+            </div>
           </div>
         </SearchOptionContainer>
-      </form>
-      <div className="grid tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 xl:grid-cols-5">
-        {error ? <p>There was an error retrieving the data.</p> : animalList()}
+
+        {error ? (
+          <div className="max-h-screen max-w-full">
+            <p className="mt-[20vh] text-2xl text-red-600 font-medium">
+              Uh oh! There was an error retrieving the data.
+            </p>
+          </div>
+        ) : (
+          <div className="grid mt-36 tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 xl:grid-cols-5">
+            <AnimalList
+              ctx={SearchDataContext}
+              setSelectedPetId={setSelectedPetId}
+              setIsOpen={setIsOpen}
+            />
+          </div>
+        )}
+        <Modal
+          selectedPetId={selectedPetId}
+          data={data}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       </div>
-      <Modal
-        selectedPetId={selectedPetId}
-        data={data}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
-    </div>
+    </>
   );
 }
 
@@ -289,7 +295,7 @@ type SearchOptionContainerProps = {
 
 function SearchOptionContainer({ children }: SearchOptionContainerProps) {
   return (
-    <div className="md:flex justify-between items-center mb-5 px-7">
+    <div className="absolute z-10 top-0 left-0 flex flex-col sm:flex-row flex-wrap self-center items-center justify-center mb-5 py-3 px-[4%] bg-purple-600 min-w-[100vw]">
       {children}
     </div>
   );
