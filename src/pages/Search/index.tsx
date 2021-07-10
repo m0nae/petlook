@@ -11,24 +11,32 @@ import SearchButton from "../../components/SearchButton";
 import AnimalList from "../../components/AnimalList";
 import { DataFetcher } from "../../components/DataFetcher";
 
-import { LocationI, SearchDataContext } from "../../contexts/SearchData";
+import { SearchDataContext } from "../../contexts/SearchData";
+import {
+  customLocationExists,
+  locationCoordinatesExist,
+} from "../../utils/locationExists";
 
-import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
-
-export default DataFetcher(SearchComponent);
+export default DataFetcher(SearchPage);
 
 // todo: FIX THIS, GIVE EVERYTHING A PROPER TYPE
 // AND NOT JUST "ANY"!!!
 
-interface SearchComponentProps {
-  handleSearch: () => void;
-}
+// interface SearchComponentProps {
+//   handleSearch: () => void;
+// }
 
-function SearchComponent({ handleSearch }: any) {
-  const { location, distance, selectedSpecies, error, data, searchDispatch } =
-    useContext(SearchDataContext);
+function SearchPage({ handleSearch, loading, ...props }: any) {
+  const {
+    location,
+    lastSearchedLocation,
+    distance,
+    selectedSpecies,
+    error,
+    data,
+    searchDispatch,
+  } = useContext(SearchDataContext);
   // const [requestMade, setRequestMade] = useState(false);
-  // const [initialLoad, setInitialLoad] = useState(true);
   const [displayMobileSearch, setDisplayMobileSearch] = useState(false);
 
   // TODO: implement pagination
@@ -38,22 +46,6 @@ function SearchComponent({ handleSearch }: any) {
   // const [searchFilters, setSearchFilters] = useState({});
   const [selectedPetId, setSelectedPetId] = useState();
   const [isOpen, setIsOpen] = useState(false);
-
-  const parsedLastSearchLocation = JSON.parse(
-    localStorage.getItem("lastSearchLocation")!,
-    (key, value) => {
-      if (key === "custom") {
-        let parsedValue = value.trim().split(",");
-        let city: string | string[] = parsedValue[0].split(" ");
-        (city as string[]).forEach((word) => capitalizeFirstLetter(word));
-
-        //  TODO: capitalize the text
-        return city;
-      } else {
-        return value;
-      }
-    }
-  );
 
   const handleLocationInput = (e: any) => {
     setLocationInput(e.target.value);
@@ -84,30 +76,6 @@ function SearchComponent({ handleSearch }: any) {
             },
           },
         });
-      } else {
-        // TODO: ALSO put this below logic inside a
-        // HOC/the selectLocation page too since it makes
-        // sense to add this whole thing in there,
-        // too, IF i decide to even keep this logic
-        let lastSearchLocation: LocationI = JSON.parse(
-          localStorage.getItem("lastSearchLocation")!
-        );
-
-        if (lastSearchLocation) {
-          searchDispatch({
-            type: "setLocation",
-            payload: lastSearchLocation.coordinates
-              ? {
-                  coordinates: {
-                    longitude: lastSearchLocation.coordinates.longitude,
-                    latitude: lastSearchLocation.coordinates.latitude,
-                  },
-                }
-              : {
-                  custom: lastSearchLocation.custom,
-                },
-          });
-        }
       }
     }
   };
@@ -187,9 +155,14 @@ function SearchComponent({ handleSearch }: any) {
               {/* turn the below code into a fn. I use it twice, in here *and* in locationInput */}
               {locationInput.length > 0
                 ? locationInput
-                : location.custom
-                ? location.custom
-                : "Insert Location"}
+                : locationCoordinatesExist(location)
+                ? "Your Location"
+                : customLocationExists(location)
+                ? `${location.custom}`
+                : lastSearchedLocation &&
+                  customLocationExists(lastSearchedLocation)
+                ? `${lastSearchedLocation.custom}`
+                : ""}
             </p>
             <span
               id="pencil-icon"
@@ -242,7 +215,7 @@ function SearchComponent({ handleSearch }: any) {
               near
               <span className="ml-3 mr-3 self-center font-medium text-black">
                 <LocationInput
-                  defaultLocationText=""
+                  defaultLocationText="Your Location"
                   handleLocationInput={handleLocationInput}
                   locationInput={locationInput}
                   className="w-[360px] rounded-sm p-2"
@@ -275,6 +248,7 @@ function SearchComponent({ handleSearch }: any) {
               ctx={SearchDataContext}
               setSelectedPetId={setSelectedPetId}
               setIsOpen={setIsOpen}
+              loading={loading}
             />
           </div>
         )}
@@ -359,8 +333,7 @@ export function Filter() {
 // here's the petfinder logo I can use if there's no available image for a pet
 // url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 230 230'%3E%3Cpath fill='%23fff' d='M115 0C51.6 0 0 51.6 0 115s51.6 115 115 115 115-51.6 115-115S178.4 0 115 0zm0 209.5c-52.2 0-94.5-42.3-94.5-94.5S62.8 20.5 115 20.5c52.2.1 94.4 42.3 94.5 94.5 0 52.2-42.3 94.5-94.5 94.5z'/%3E%3Ccircle fill='%23fff' cx='147.1' cy='69.1' r='14.1'/%3E%3Cpath fill='%23fff' d='M83 151.6c15.4 0 21.9-9.2 21.9-23.9 0-6.5-5.2-12-5.2-19-.2-8.7 6.8-15.9 15.5-16h.6c9.8 0 15.9 8.3 15.9 16 0 7.4-5.2 12.3-5.2 19.1 0 14.7 6 23.8 21.8 23.8 12.8 0 19-6.9 24.7-15.7 1.9-2.9 5-5.2 8.4-5.2 5.1 0 8 3.7 8 7.7 0 9.6-16.5 31.8-41.4 31.8-8.6 0-23.3-1.8-32.2-15.7-8.2 12.6-20.7 15.7-32.1 15.7-26 0-41.6-23-41.6-31.8 0-4.2 3.4-7.7 7.6-7.7h.2c3.5.2 6.8 2.1 8.6 5.2 5.5 9 12.3 15.7 24.5 15.7z'/%3E%3C/svg%3E"),linear-gradient(180deg,#dad5de,#eae9ed)
 
-{
-  /* <Option
+/* <Option
                   label="Species"
                   option={{
                     optionName: "dog",
@@ -368,4 +341,3 @@ export function Filter() {
                   }}
                   searchType="species"
                 /> */
-}

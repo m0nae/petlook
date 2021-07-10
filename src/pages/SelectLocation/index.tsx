@@ -6,10 +6,12 @@ import { locationExists } from "../../utils/locationExists";
 import NavButton from "../../components/NavButton";
 
 export default function SelectLocation() {
-  const { location, searchDispatch } = useContext(SearchDataContext);
+  const { location, lastSearchedLocation, searchDispatch } =
+    useContext(SearchDataContext);
   const [locationInput, setLocationInput] = useState("");
 
   // todo: should this go in the DataFetcher HOC?
+  // todo: I REUSED THIS LOGIC INSIDE OF THE SEARCH DATA CTX
   useEffect(() => {
     let userLocation = {
       longitude: localStorage.getItem("longitude"),
@@ -33,6 +35,8 @@ export default function SelectLocation() {
     if (locationInput.length > 0) {
       return false;
     } else if (locationExists(location)) {
+      return false;
+    } else if (locationExists(lastSearchedLocation)) {
       return false;
     } else {
       return true;

@@ -38,7 +38,7 @@ export async function fetchData(
 ) {
   let token = await getToken();
 
-  localStorage.setItem("lastSearchLocation", JSON.stringify(location));
+  localStorage.setItem("lastSearchedLocation", JSON.stringify(location));
 
   let options: AxiosRequestConfig = {
     method: "get",

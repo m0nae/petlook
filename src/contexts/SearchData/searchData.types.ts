@@ -14,6 +14,7 @@ export interface DataI {
 
 export interface StateI {
   location: LocationI;
+  lastSearchedLocation: LocationI;
   distance: number;
   selectedSpecies: {
     label: string;
@@ -32,6 +33,7 @@ export type ActionsT =
 
 export interface SearchDataContextValue {
   location: StateI["location"];
+  lastSearchedLocation: StateI["lastSearchedLocation"];
   distance: StateI["distance"];
   selectedSpecies: StateI["selectedSpecies"];
   data: StateI["data"];

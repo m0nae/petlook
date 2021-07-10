@@ -6,21 +6,27 @@ import { locationExists } from "../../utils/locationExists";
 export function DataFetcher(Component: React.FC<any>) {
   return function Wrapper(...props: any[]) {
     const [loading, setLoading] = useState(false);
-    const { location, selectedSpecies, distance, searchDispatch } =
-      useContext(SearchDataContext);
+    const {
+      location,
+      lastSearchedLocation,
+      selectedSpecies,
+      distance,
+      searchDispatch,
+    } = useContext(SearchDataContext);
 
     useEffect(() => {
       handleSearch();
     }, []);
 
     const handleSearch = () => {
-      console.log("handle search called");
-      if (locationExists(location)) {
+      if (locationExists(location) || lastSearchedLocation) {
         setLoading(true);
-        console.log("both location and species exist!");
-        fetchData(location, selectedSpecies, distance)
+        fetchData(
+          locationExists(location) ? location : lastSearchedLocation,
+          selectedSpecies,
+          distance
+        )
           .then((res: any) => {
-            console.log(res);
             res = res.data;
             let data: any = {
               ...res,

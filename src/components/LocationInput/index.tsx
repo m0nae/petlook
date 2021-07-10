@@ -1,5 +1,9 @@
 import { useContext, useState } from "react";
 import { SearchDataContext } from "../../contexts/SearchData";
+import {
+  customLocationExists,
+  locationCoordinatesExist,
+} from "../../utils/locationExists";
 
 interface LocationInputProps {
   locationInput: string;
@@ -14,7 +18,7 @@ export default function LocationInput({
   defaultLocationText,
   className,
 }: LocationInputProps) {
-  const { location } = useContext(SearchDataContext);
+  const { location, lastSearchedLocation } = useContext(SearchDataContext);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   return (
@@ -23,11 +27,14 @@ export default function LocationInput({
       value={
         locationInput.length > 0
           ? locationInput
-          : location &&
-            location.coordinates &&
-            location.coordinates.longitude &&
-            !isInputFocused
+          : location && customLocationExists(location) && !isInputFocused
+          ? `${location.custom}`
+          : location && locationCoordinatesExist(location) && !isInputFocused
           ? defaultLocationText
+          : lastSearchedLocation &&
+            customLocationExists(lastSearchedLocation) &&
+            !isInputFocused
+          ? lastSearchedLocation.custom
           : ""
       }
       onChange={(e) => handleLocationInput(e)}

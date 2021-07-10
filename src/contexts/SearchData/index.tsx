@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
+import { parseLocation } from "../../utils/parseLocation";
 import { StateI, ActionsT, SearchDataContextValue } from "./searchData.types";
 
 export * from "./searchData.types";
@@ -8,14 +9,38 @@ export const SearchDataContext = createContext(
   undefined as unknown as SearchDataContextValue
 );
 
+const lastSearchedLocation = JSON.parse(
+  localStorage.getItem("lastSearchLocation")!,
+  (key, value) => {
+    if (key === "custom" && typeof value === "string") {
+      return parseLocation(value);
+    } else {
+      return value;
+    }
+  }
+);
+
+let userLocation = {
+  longitude: localStorage.getItem("longitude")
+    ? localStorage.getItem("longitude")!
+    : undefined,
+  latitude: localStorage.getItem("latitude")
+    ? localStorage.getItem("latitude")!
+    : undefined,
+};
+
 const initialState: StateI = {
   location: {
-    coordinates: {
-      longitude: undefined,
-      latitude: undefined,
-    },
+    coordinates:
+      userLocation.longitude && userLocation.latitude
+        ? userLocation
+        : {
+            longitude: undefined,
+            latitude: undefined,
+          },
     custom: undefined,
   },
+  lastSearchedLocation,
   distance: 100,
   selectedSpecies: {
     label: "",
@@ -72,6 +97,7 @@ export function SearchDataProvider(props: any) {
     <SearchDataContext.Provider
       value={{
         location,
+        lastSearchedLocation,
         distance,
         selectedSpecies,
         data,
