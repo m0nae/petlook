@@ -1,16 +1,22 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    screens: {
+      tinyMax: { max: "320px" },
+      tiny: { min: "320px" },
+      mobileMax: { max: "440px" },
+      mobile: { min: "440px" },
+      ...defaultTheme.screens,
+    },
     extend: {
       fontFamily: {
         Poppins: ["Poppins", "sans-serif"],
       },
       screens: {
-        tiny: { max: "320px" },
-        mobileMax: { max: "440px" },
-        mobile: { min: "440px" },
         tablet: { min: "440px", max: "639px" },
         default: { max: "639px" },
         1135: { min: "1135px" },
