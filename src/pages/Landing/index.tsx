@@ -9,19 +9,19 @@ const eyes = <Icon className="inline-block" icon={eyesIcon} />;
 export default function Landing() {
   return (
     <>
-      <section className="min-h-[92vh] min-w-full pb-10 bg-purple-600 text-white body-font font-Poppins">
+      <section className="min-h-[90vh] min-w-full pb-10 bg-purple-600 text-white body-font font-Poppins">
         <div className="flex flex-col justify-items-center items-center">
           <div className="flex flex-col mt-5 w-[90%] max-w-5xl">
-            <h1 className="text-[4.2rem] tablet:text-[5rem] sm:text-[8rem] lg:text-[9rem] font-bold text-white text-center pt-12">
+            <h1 className="text-[3.8rem] tiny:text-[4.2rem] mobile:text-[6rem] sm:text-[8rem] lg:text-[9rem] font-bold text-white text-center pt-8 ">
               <span className="inline-block">PetL{eyes}k</span>
             </h1>
-            <p className="text-4xl text-white font-medium mt-4 mx-4">
+            <p className="text-3xl mobile:text-4xl text-white font-medium mt-4 mx-4">
               Browse through a selection of adoptable pets and find your next
               furry friend.
             </p>
             <Link
               to="/select-species"
-              className="transform bg-[#00a9f0] hover:shadow-landingActive hover:translate-y-1 transition-all duration-100 hover:cursor-pointer shadow-landing text-center text-5xl font-semibold rounded-lg px-16 py-12 mt-10 sm:mt-20"
+              className="transform bg-[#00a9f0] hover:shadow-landingActive hover:translate-y-1 transition-all duration-100 hover:cursor-pointer shadow-landing text-center text-4xl mobile:text-5xl font-semibold rounded-lg tiny:px-10 mobile:px-16 py-12 mt-10 mb-10 sm:mt-20"
             >
               Find a Pet
             </Link>
