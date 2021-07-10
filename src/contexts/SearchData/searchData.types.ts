@@ -9,7 +9,7 @@ export interface LocationI {
 }
 
 export interface DataI {
-  animals: [];
+  animals: [] | undefined;
 }
 
 export interface StateI {

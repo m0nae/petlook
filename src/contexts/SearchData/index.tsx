@@ -22,7 +22,7 @@ const initialState: StateI = {
     value: "" as T.SPECIES,
   },
   data: {
-    animals: [],
+    animals: undefined,
   },
   error: false,
 };

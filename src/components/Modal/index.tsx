@@ -11,7 +11,11 @@ export default function Modal({
   let { name, species, age, gender, photos } = currentPet[0] ?? {};
 
   useEffect(() => {
-    setCurrentPet(data.animals.filter((animal) => animal.id === selectedPetId));
+    setCurrentPet(
+      data.animals
+        ? data.animals?.filter((animal) => animal.id === selectedPetId)
+        : []
+    );
   }, [selectedPetId, data]);
 
   if (!isOpen) return null;
@@ -56,6 +60,6 @@ Modal.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
   selectedPetId: PropTypes.number,
   data: PropTypes.shape({
-    animals: PropTypes.array.isRequired,
+    animals: PropTypes.array,
   }).isRequired,
 };
