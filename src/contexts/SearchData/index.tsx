@@ -10,7 +10,7 @@ export const SearchDataContext = createContext(
 );
 
 const lastSearchedLocation = JSON.parse(
-  localStorage.getItem("lastSearchLocation")!,
+  localStorage.getItem("lastSearchedLocation")!,
   (key, value) => {
     if (key === "custom" && typeof value === "string") {
       return parseLocation(value);
