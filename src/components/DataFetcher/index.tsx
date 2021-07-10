@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { SearchDataContext } from "../../contexts/SearchData";
 import { fetchData } from "../../utils/fetchData";
 import { locationExists } from "../../utils/locationExists";
 
 export function DataFetcher(Component: React.FC<any>) {
   return function Wrapper(...props: any[]) {
+    const [loading, setLoading] = useState(false);
     const { location, selectedSpecies, distance, searchDispatch } =
       useContext(SearchDataContext);
 
@@ -15,6 +16,7 @@ export function DataFetcher(Component: React.FC<any>) {
     const handleSearch = () => {
       console.log("handle search called");
       if (locationExists(location)) {
+        setLoading(true);
         console.log("both location and species exist!");
         fetchData(location, selectedSpecies, distance)
           .then((res: any) => {
@@ -26,15 +28,21 @@ export function DataFetcher(Component: React.FC<any>) {
                 (animal: any) => animal.status === "adoptable"
               ),
             };
+            setLoading(false);
             searchDispatch({ type: "setData", payload: data });
             searchDispatch({ type: "setError", payload: false });
           })
-          .catch((err) => searchDispatch({ type: "setError", payload: true }));
+          .catch((err) => {
+            setLoading(false);
+            searchDispatch({ type: "setError", payload: true });
+          });
       } else {
         return;
       }
     };
 
-    return <Component {...props} handleSearch={handleSearch} />;
+    return (
+      <Component {...props} loading={loading} handleSearch={handleSearch} />
+    );
   };
 }
