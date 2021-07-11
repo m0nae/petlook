@@ -5,44 +5,25 @@ import {
   SearchDataContextValue,
 } from "../../contexts/SearchData";
 import Icon from "@iconify/react";
-import icon from "../Icons";
 
 import { parsedSpecies } from "../../utils/parsedSpecies";
+import chooseIcon from "../../utils/chooseIcon";
 
 export default function Select() {
   const { selectedSpecies, searchDispatch } = useContext(SearchDataContext);
 
   useEffect(() => {
-    chooseIcon();
+    chooseIcon(selectedSpecies.value);
   }, [selectedSpecies]);
-
-  const chooseIcon = () => {
-    switch (selectedSpecies.value) {
-      case "dog":
-        return icon.dog;
-      case "cat":
-        return icon.cat;
-      case "barnyard":
-        return icon.pig;
-      case "bird":
-        return icon.bird;
-      case "rabbit":
-        return icon.rabbit;
-      case "scales, fins, & other":
-        return icon.fish;
-      case "horse":
-        return icon.horse;
-      case "small & furry":
-        return icon.hamster;
-      default:
-        return icon.dog;
-    }
-  };
 
   return (
     <div className="flex">
       {selectedSpecies && (
-        <Icon width="3rem" icon={chooseIcon()!} className="mr-4" />
+        <Icon
+          width="3rem"
+          icon={chooseIcon(selectedSpecies.value)!}
+          className="mr-4"
+        />
       )}
       <select
         name="species"

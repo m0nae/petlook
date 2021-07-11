@@ -15,6 +15,8 @@ import {
   customLocationExists,
   locationCoordinatesExist,
 } from "../../utils/locationExists";
+import chooseIcon from "../../utils/chooseIcon";
+import { Icon } from "@iconify/react";
 
 export default DataFetcher(SearchPage);
 
@@ -144,6 +146,11 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             className="flex items-center 1135:hidden text-white text-xl h-[80px]"
           >
             <p>
+              <Icon
+                width="3rem"
+                className="inline-block mr-3"
+                icon={chooseIcon(selectedSpecies.value)}
+              />
               {selectedSpecies.label.length > 0
                 ? selectedSpecies.label
                 : "Dogs"}{" "}
