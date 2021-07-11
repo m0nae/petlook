@@ -8,7 +8,7 @@ export default function Modal({
   data,
 }: InferProps<typeof Modal.propTypes>) {
   const [currentPet, setCurrentPet] = useState<any>({});
-  let { name, species, age, gender, photos } = currentPet[0] ?? {};
+  let { name, species, age, gender, photos, breeds } = currentPet[0] ?? {};
 
   useEffect(() => {
     setCurrentPet(
@@ -28,7 +28,7 @@ export default function Modal({
       />
       <div
         id="modal"
-        className="transform -translate-x-1/2 -translate-y-1/2 z-[100] fixed top-[50%] left-[50%] h-[400px] w-[550px] bg-white rounded-xl"
+        className="transform -translate-x-1/2 -translate-y-1/2 z-[100] fixed top-[50%] left-[50%] h-[400px] w-[90%] max-w-[550px] bg-white rounded-xl"
       >
         <div id="modal-container" className="flex flex-col m-3">
           <img
@@ -39,13 +39,19 @@ export default function Modal({
                 : "https://www.freeiconspng.com/uploads/no-image-icon-8.png")
             }
             alt="Pet"
-            className="object-cover max-h-[200px] rounded-md"
+            className="object-cover max-h-[30vh] md:max-h-[200px] rounded-md"
           />
           <div id="modal-pet-info" className="">
-            <h2 className="text-2xl font-bold">{name}</h2>
-            <p>{species && species}</p>
-            <p>{age && age}</p>
-            <p>{gender && gender}</p>
+            <h2 className="text-xl font-bold">{name}</h2>
+            {/* <p>{species && species}</p> */}
+            <p>
+              {breeds &&
+                `${breeds.primary ? breeds.primary : "Unknown"} ${
+                  breeds.mixed ? "Mix" : ""
+                }`}{" "}
+              * {age && age}
+            </p>
+            <p>{gender && gender} * {} * {}</p>
             <button onClick={() => setIsOpen(false)}>Close modal</button>
           </div>
         </div>
