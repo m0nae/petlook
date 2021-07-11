@@ -28,7 +28,7 @@ export default function AnimalList({
               image={
                 animal.photos[0]
                   ? animal.photos[0].large
-                  : "https://via.placeholder.com/480x325"
+                  : "https://www.freeiconspng.com/uploads/no-image-icon-8.png"
               }
               name={animal.name}
               info={{

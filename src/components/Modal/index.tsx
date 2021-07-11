@@ -36,7 +36,7 @@ export default function Modal({
               photos &&
               (photos[0]
                 ? photos[0].large
-                : "https://via.placeholder.com/480x325")
+                : "https://www.freeiconspng.com/uploads/no-image-icon-8.png")
             }
             alt="Pet"
             className="object-cover max-h-[200px] rounded-md"
