@@ -38,6 +38,7 @@ export default function AnimalList({
                 } ${animal.breeds.mixed ? "Mix" : ""}`,
                 age: animal.age,
                 gender: animal.gender,
+                url: animal.url,
               }}
               setSelectedPetId={setSelectedPetId}
               setIsOpen={setIsOpen}

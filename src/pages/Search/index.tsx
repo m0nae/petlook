@@ -4,7 +4,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { LocationIcon } from "../SelectLocation";
 
 import Option from "../../components/Option";
-import Modal from "../../components/Modal";
 import Select from "../../components/Select";
 import LocationInput from "../../components/LocationInput";
 import SearchButton from "../../components/SearchButton";
@@ -33,7 +32,6 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
     distance,
     selectedSpecies,
     error,
-    data,
     searchDispatch,
   } = useContext(SearchDataContext);
   // const [requestMade, setRequestMade] = useState(false);
@@ -252,12 +250,12 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             />
           </div>
         )}
-        <Modal
+        {/* <Modal
           selectedPetId={selectedPetId}
           data={data}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-        />
+        /> */}
       </div>
     </>
   );
