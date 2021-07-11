@@ -139,7 +139,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
         className={
           displayMobileSearch
             ? "hidden"
-            : "App h-full min-w-screen font-Poppins pb-10 mx-[10%]"
+            : "App h-full min-w-screen font-Poppins pb-10 mx-[5%] sm:mx-[10%] max-w-screen-2xl 2xl:mx-auto 2xl:my-0"
         }
       >
         <SearchOptionContainer>
@@ -243,7 +243,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             </p>
           </div>
         ) : (
-          <div className="grid mt-36 tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 xl:grid-cols-5">
+          <div className="grid grid-cols-2 mt-36 tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 xl:grid-cols-5 2xl:mx-10">
             <AnimalList
               ctx={SearchDataContext}
               setSelectedPetId={setSelectedPetId}

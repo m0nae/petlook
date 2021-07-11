@@ -27,6 +27,13 @@ body {
   right: 1.4em;
 }
 
+#pet-info {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
 /* loading spinner from https://projects.lukehaas.me/css-loaders/ */
 
 .loader,
