@@ -20,6 +20,10 @@ const lastSearchedLocation = JSON.parse(
   }
 );
 
+const lastSearchedSpecies = JSON.parse(
+  localStorage.getItem("lastSearchedSpecies")!
+);
+
 let userLocation = {
   longitude: localStorage.getItem("longitude")
     ? localStorage.getItem("longitude")!
@@ -28,6 +32,9 @@ let userLocation = {
     ? localStorage.getItem("latitude")!
     : undefined,
 };
+
+// if lastSearchedSpecies exist, use it as initial state. if not, use the regular ol
+// selectedSpecies default. SAME EXACT logic as the lastSearchedLocation!!!
 
 const initialState: StateI = {
   location: {
@@ -42,7 +49,7 @@ const initialState: StateI = {
   },
   lastSearchedLocation,
   distance: 100,
-  selectedSpecies: {
+  selectedSpecies: lastSearchedSpecies ?? {
     label: "",
     value: "" as T.SPECIES,
   },

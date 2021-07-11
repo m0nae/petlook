@@ -40,6 +40,10 @@ export async function fetchData(
 
   localStorage.setItem("lastSearchedLocation", JSON.stringify(location));
 
+  if (species.label.trim() !== "" && species.value.trim() !== "") {
+    localStorage.setItem("lastSearchedSpecies", JSON.stringify(species));
+  }
+
   let options: AxiosRequestConfig = {
     method: "get",
     headers: {
