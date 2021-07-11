@@ -5,15 +5,7 @@ import {
   SearchDataContextValue,
 } from "../../contexts/SearchData";
 import Icon from "@iconify/react";
-
-import pigFace from "@iconify-icons/twemoji/pig-face";
-import catFace from "@iconify-icons/twemoji/cat-face";
-import dogFace from "@iconify-icons/twemoji/dog-face";
-import horseFace from "@iconify-icons/twemoji/horse-face";
-import birdIcon from "@iconify-icons/twemoji/bird";
-import rabbitFace from "@iconify-icons/noto/rabbit-face";
-import hamsterIcon from "@iconify-icons/noto/hamster";
-import fishIcon from "@iconify-icons/noto/fish";
+import icon from "../Icons";
 
 import { parsedSpecies } from "../../utils/parsedSpecies";
 
@@ -27,23 +19,23 @@ export default function Select() {
   const chooseIcon = () => {
     switch (selectedSpecies.value) {
       case "dog":
-        return dogFace;
+        return icon.dog;
       case "cat":
-        return catFace;
+        return icon.cat;
       case "barnyard":
-        return pigFace;
+        return icon.pig;
       case "bird":
-        return birdIcon;
+        return icon.bird;
       case "rabbit":
-        return rabbitFace;
+        return icon.rabbit;
       case "scales, fins, & other":
-        return fishIcon;
+        return icon.fish;
       case "horse":
-        return horseFace;
+        return icon.horse;
       case "small & furry":
-        return hamsterIcon;
+        return icon.hamster;
       default:
-        return dogFace;
+        return icon.dog;
     }
   };
 

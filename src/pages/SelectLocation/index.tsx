@@ -4,6 +4,7 @@ import { SearchDataContext } from "../../contexts/SearchData";
 import LocationInput from "../../components/LocationInput";
 import { locationExists } from "../../utils/locationExists";
 import NavButton from "../../components/NavButton";
+import icon from "../../components/Icons";
 
 export default function SelectLocation() {
   const { location, lastSearchedLocation, searchDispatch } =
@@ -93,7 +94,7 @@ export default function SelectLocation() {
               id="location-input-container"
               className="flex w-full lg:w-[80%] h-[85px] rounded-md bg-white mt-[7vh]"
             >
-              <LocationIcon customClass="h-16 w-16 self-center text-red-600 ml-3" />
+              <icon.location customClass="h-16 w-16 self-center text-red-600 ml-3" />
               <LocationInput
                 locationInput={locationInput}
                 handleLocationInput={handleLocationInput}
@@ -119,29 +120,6 @@ export default function SelectLocation() {
           </div>
         </div>
       </div>
-    </>
-  );
-}
-
-interface LocationIconProps {
-  customClass: string;
-}
-
-export function LocationIcon({ customClass }: LocationIconProps) {
-  return (
-    <>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className={customClass}
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-          clipRule="evenodd"
-        />
-      </svg>
     </>
   );
 }

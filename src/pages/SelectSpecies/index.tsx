@@ -3,21 +3,13 @@ import {
   SearchDataContext,
   SearchDataContextValue,
 } from "../../contexts/SearchData";
-import { Icon } from "@iconify/react";
-import pigFace from "@iconify-icons/twemoji/pig-face";
-import dogFace from "@iconify-icons/twemoji/dog-face";
-import catFace from "@iconify-icons/twemoji/cat-face";
-import horseFace from "@iconify-icons/twemoji/horse-face";
-import birdIcon from "@iconify-icons/twemoji/bird";
-import rabbitFace from "@iconify-icons/noto/rabbit-face";
-import hamsterIcon from "@iconify-icons/noto/hamster";
-import fishIcon from "@iconify-icons/noto/fish";
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
-import NavButton from "../../components/NavButton";
 import { parsedSpecies } from "../../utils/parsedSpecies";
 
-// todo: try putting these icons into their own file, they're
-// cluttering things up
+import { Icon } from "@iconify/react";
+import icon from "../../components/Icons";
+
+import NavButton from "../../components/NavButton";
 
 export default function SelectSpecies() {
   const { selectedSpecies, searchDispatch } = useContext(SearchDataContext);
@@ -55,49 +47,49 @@ export default function SelectSpecies() {
             <Selection
               selectionName="dog"
               text="Dog"
-              icon={{ element: dogFace }}
+              icon={{ element: icon.dog }}
               handleClick={handleClick}
             />
             <Selection
               selectionName="cat"
               text="Cat"
-              icon={{ element: catFace }}
+              icon={{ element: icon.cat }}
               handleClick={handleClick}
             />
             <Selection
               selectionName="rabbit"
               text="Rabbit"
-              icon={{ element: rabbitFace }}
+              icon={{ element: icon.rabbit }}
               handleClick={handleClick}
             />
             <Selection
               selectionName="small & furry"
               text="Small & Furry"
-              icon={{ element: hamsterIcon }}
+              icon={{ element: icon.hamster }}
               handleClick={handleClick}
             />
             <Selection
               selectionName="barnyard"
               text="Barnyard"
-              icon={{ element: pigFace }}
+              icon={{ element: icon.pig }}
               handleClick={handleClick}
             />
             <Selection
               selectionName="bird"
               text="Bird"
-              icon={{ element: birdIcon }}
+              icon={{ element: icon.bird }}
               handleClick={handleClick}
             />
             <Selection
               selectionName="horse"
               text="Horse"
-              icon={{ element: horseFace }}
+              icon={{ element: icon.horse }}
               handleClick={handleClick}
             />
             <Selection
               selectionName="scales, fins, & other"
               text="Scales, Fins & Other"
-              icon={{ element: fishIcon }}
+              icon={{ element: icon.fish }}
               handleClick={handleClick}
             />
           </div>

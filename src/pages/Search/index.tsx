@@ -1,7 +1,7 @@
 import React, { useState, useContext, ReactNode, Fragment } from "react";
 import "../../index.css";
 import { Menu, Transition } from "@headlessui/react";
-import { LocationIcon } from "../SelectLocation";
+import icon from "../../components/Icons";
 
 import Option from "../../components/Option";
 import Select from "../../components/Select";
@@ -112,7 +112,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
           id="location-input-container"
           className="flex w-[80%] h-[85px] rounded-md bg-white mt-[10vh] shadow-sm mb-7"
         >
-          <LocationIcon customClass="h-16 w-16 self-center text-red-600 ml-3" />
+          <icon.location customClass="h-16 w-16 self-center text-red-600 ml-3" />
           <LocationInput
             locationInput={locationInput}
             handleLocationInput={handleLocationInput}
