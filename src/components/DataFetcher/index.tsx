@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState, useCallback } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState } from "react";
 import { SearchDataContext } from "../../contexts/SearchData";
 import { fetchData } from "../../utils/fetchData";
 import { locationExists } from "../../utils/locationExists";

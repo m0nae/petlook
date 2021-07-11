@@ -8,7 +8,7 @@ export default function Modal({
   data,
 }: InferProps<typeof Modal.propTypes>) {
   const [currentPet, setCurrentPet] = useState<any>({});
-  let { name, species, age, gender, photos, breeds } = currentPet[0] ?? {};
+  let { name, age, gender, photos, breeds } = currentPet[0] ?? {};
 
   useEffect(() => {
     setCurrentPet(
@@ -51,7 +51,9 @@ export default function Modal({
                 }`}{" "}
               * {age && age}
             </p>
-            <p>{gender && gender} * {} * {}</p>
+            <p>
+              {gender && gender} * {} * {}
+            </p>
             <button onClick={() => setIsOpen(false)}>Close modal</button>
           </div>
         </div>

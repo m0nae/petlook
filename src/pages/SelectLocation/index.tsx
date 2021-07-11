@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
 import { SearchDataContext } from "../../contexts/SearchData";
-import { Link } from "react-router-dom";
 import LocationInput from "../../components/LocationInput";
 import { locationExists } from "../../utils/locationExists";
 import NavButton from "../../components/NavButton";
