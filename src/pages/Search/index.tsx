@@ -17,6 +17,7 @@ import {
 } from "../../utils/locationExists";
 import chooseIcon from "../../utils/chooseIcon";
 import { Icon } from "@iconify/react";
+import SearchOptions from "../../components/SearchOptions";
 
 export default DataFetcher(SearchPage);
 
@@ -144,7 +145,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             : "App h-full min-w-screen font-Poppins pb-10 mx-[5%] sm:mx-[10%] max-w-screen-2xl 2xl:mx-auto 2xl:my-0"
         }
       >
-        <SearchOptionContainer>
+        <SearchOptions>
           <div
             id="mobile-search-container"
             className="flex items-center 1135:hidden text-white text-xl h-[80px]"
@@ -245,7 +246,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               <Filter />
             </div>
           </div>
-        </SearchOptionContainer>
+        </SearchOptions>
 
         {error ? (
           <div className="max-h-screen max-w-full">
@@ -271,18 +272,6 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
         /> */}
       </div>
     </>
-  );
-}
-
-type SearchOptionContainerProps = {
-  children: ReactNode;
-};
-
-function SearchOptionContainer({ children }: SearchOptionContainerProps) {
-  return (
-    <div className="absolute z-10 top-0 left-0 flex flex-col sm:flex-row flex-wrap self-center items-center justify-center mb-5 py-3 px-[4%] bg-purple-600 min-w-[100vw]">
-      {children}
-    </div>
   );
 }
 
