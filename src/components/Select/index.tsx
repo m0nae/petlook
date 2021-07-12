@@ -21,14 +21,11 @@ export default function Select({ className }: any) {
       ? ["flex", className["container"]].filter(Boolean).join(" ").trim()
       : "flex",
     selectElement: className
-      ? [
-          "border-none text-xl rounded-sm pl-2 mr-3 bg-purple-600 text-white focus-within:text-black focus-within:bg-white",
-          className["selectElement"],
-        ]
+      ? ["border-none text-xl rounded-sm pl-2 mr-3", className["selectElement"]]
           .filter(Boolean)
           .join(" ")
           .trim()
-      : "border-none text-xl rounded-sm pl-2 mr-3 bg-purple-600 text-white focus-within:text-black focus-within:bg-white",
+      : "border-none text-xl rounded-sm pl-2 mr-3",
   };
 
   return (

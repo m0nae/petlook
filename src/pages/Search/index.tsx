@@ -113,13 +113,13 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
           id="species-and-distance"
           className="flex flex-col mobile:flex-row items-center mobile:w-[80%]"
         >
-        <Select
-          className={{
-            container: "w-[80%]",
-            selectElement: "w-full py-4 md:text-xl",
-          }}
-        />
-        <div
+          <Select
+            className={{
+              container: "w-[80%]",
+              selectElement: "w-full py-4 md:text-xl rounded-md shadow-sm",
+            }}
+          />
+          <div
             id="miles-filter-container-mobile"
             className="flex items-center text-xl font-medium self-center mt-3 shadow-sm mobile:mt-0"
           >
@@ -137,7 +137,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
         </div>
         <div
           id="location-input-container"
-          className="flex w-[80%] h-[85px] rounded-md bg-white mt-[10vh] shadow-sm mb-7"
+          className="flex w-[80%] h-[85px] rounded-md bg-white mt-[7vh] shadow-sm mb-7"
         >
           <icon.location customClass="h-16 w-16 self-center text-red-600 ml-3" />
           <LocationInput
@@ -215,7 +215,8 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               <span className="text-2xl font-medium ml-3">
                 <Select
                   className={{
-                    selectElement: "w-[200px]",
+                    selectElement:
+                      "w-[200px] bg-purple-600 text-white focus-within:text-black focus-within:bg-white",
                   }}
                 />
               </span>
