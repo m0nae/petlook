@@ -52,8 +52,12 @@ export default function Select({ className }: any) {
         }}
         defaultValue={selectedSpecies.value}
       >
-        {parsedSpecies.map((animal) => {
-          return <option value={animal.value}>{animal.label}</option>;
+        {parsedSpecies.map((animal, index) => {
+          return (
+            <option key={index} value={animal.value}>
+              {animal.label}
+            </option>
+          );
         })}
       </select>
     </div>
