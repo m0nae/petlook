@@ -256,9 +256,9 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             >
               Search
             </SearchButton>{" "}
-            <div id="filters-container" className="flex items-center">
+            {/* <div id="filters-container" className="flex items-center">
               <Filter />
-            </div>
+            </div> */}
           </div>
         </SearchOptions>
 
