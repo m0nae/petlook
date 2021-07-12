@@ -108,7 +108,6 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             />
           </svg>
         </span>
-        {/* todo: give Select element an option, custom className prop */}
         <Select
           className={{
             container: "w-[80%]",

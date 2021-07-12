@@ -48,7 +48,6 @@ export function parseSearchOptions(
 
           return option;
         } else {
-          //todo: make this into a function maybe???
           option = {
             value: option,
             label: capitalizeFirstLetter(option),
