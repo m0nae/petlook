@@ -109,7 +109,12 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
           </svg>
         </span>
         {/* todo: give Select element an option, custom className prop */}
-        <Select />
+        <Select
+          className={{
+            container: "w-[80%]",
+            selectElement: "w-full py-4 md:text-xl",
+          }}
+        />
         <div
           id="location-input-container"
           className="flex w-[80%] h-[85px] rounded-md bg-white mt-[10vh] shadow-sm mb-7"
@@ -188,7 +193,11 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               onClick={(e) => e.preventDefault()}
             >
               <span className="text-2xl font-medium ml-3">
-                <Select />
+                <Select
+                  className={{
+                    selectElement: "w-[200px]",
+                  }}
+                />
               </span>
             </div>
             {/* todo: turn this into a component */}
