@@ -33,9 +33,6 @@ let userLocation = {
     : undefined,
 };
 
-// if lastSearchedSpecies exist, use it as initial state. if not, use the regular ol
-// selectedSpecies default. SAME EXACT logic as the lastSearchedLocation!!!
-
 const initialState: StateI = {
   location: {
     coordinates:

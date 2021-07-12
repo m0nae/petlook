@@ -16,7 +16,6 @@ import {
 import chooseIcon from "../../utils/chooseIcon";
 import { Icon } from "@iconify/react";
 import SearchOptions from "../../components/SearchOptions";
-import Filter from "../../components/Filters";
 import DistanceInput from "../../components/DistanceInput";
 
 export default DataFetcher(SearchPage);
