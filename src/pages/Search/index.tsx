@@ -17,6 +17,7 @@ import chooseIcon from "../../utils/chooseIcon";
 import { Icon } from "@iconify/react";
 import SearchOptions from "../../components/SearchOptions";
 import Filter from "../../components/Filters";
+import DistanceInput from "../../components/DistanceInput";
 
 export default DataFetcher(SearchPage);
 
@@ -199,20 +200,13 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
                 />
               </span>
             </div>
-            {/* todo: turn this into a component */}
             <div
               id="miles-filter-container"
               className="flex text-xl font-medium self-center"
             >
-              <label htmlFor="miles-filter" className="hidden">
-                Distance
-              </label>
-              <input
-                id="miles-filter"
-                type="number"
-                value={distance}
-                className="w-[120px] p-2 rounded-sm mr-3"
-                onChange={(e) =>
+              <DistanceInput
+                distance={distance}
+                onChange={(e: any) =>
                   searchDispatch({
                     type: "setDistance",
                     payload: Number(e.target.value),
