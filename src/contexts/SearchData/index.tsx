@@ -70,7 +70,12 @@ function reducer(state: typeof initialState, action: ActionsT): StateI {
     case "setDistance":
       return {
         ...state,
-        distance: Number(action.payload),
+        distance:
+          action.payload < 0
+            ? 0
+            : action.payload > 500
+            ? 500
+            : Number(action.payload),
       };
 
     case "setSelectedSpecies":
