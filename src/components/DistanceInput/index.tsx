@@ -1,4 +1,9 @@
-export default function DistanceInput({ distance, onChange }: any) {
+export default function DistanceInput({ distance, onChange, className }: any) {
+  let classNames = ["p-2 rounded-sm", className]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+
   return (
     <>
       <label htmlFor="miles-filter" className="hidden">
@@ -10,7 +15,9 @@ export default function DistanceInput({ distance, onChange }: any) {
         min="0"
         max="500"
         value={distance}
-        className="w-[120px] p-2 rounded-sm mr-3"
+        className={
+          classNames && className ? classNames : "w-[120px] p-2 rounded-sm mr-3"
+        }
         onChange={onChange}
       />
     </>

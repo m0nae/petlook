@@ -109,12 +109,32 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             />
           </svg>
         </span>
+        <div
+          id="species-and-distance"
+          className="flex flex-col mobile:flex-row items-center mobile:w-[80%]"
+        >
         <Select
           className={{
             container: "w-[80%]",
             selectElement: "w-full py-4 md:text-xl",
           }}
         />
+        <div
+            id="miles-filter-container-mobile"
+            className="flex items-center text-xl font-medium self-center mt-3 shadow-sm mobile:mt-0"
+          >
+            <DistanceInput
+              className="w-[73vw] max-w-[345px] mobile:max-w-[160px] mobile:w-[35vw] py-4 pl-6 text-2xl rounded-md"
+              distance={distance}
+              onChange={(e: any) =>
+                searchDispatch({
+                  type: "setDistance",
+                  payload: Number(e.target.value),
+                })
+              }
+            />
+          </div>
+        </div>
         <div
           id="location-input-container"
           className="flex w-[80%] h-[85px] rounded-md bg-white mt-[10vh] shadow-sm mb-7"
