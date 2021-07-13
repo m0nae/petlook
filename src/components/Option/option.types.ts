@@ -1,4 +1,4 @@
-import PropTypes, { InferProps } from "prop-types";
+import PropTypes from "prop-types";
 import {
   species,
   size,
@@ -9,9 +9,6 @@ import {
 } from "../../utils/parseSearchOptions";
 
 export namespace SearchOptionTypes {
-  /**
-   * @property foo Some docs.
-   */
   export type SPECIES =
     | "dog"
     | "cat"
