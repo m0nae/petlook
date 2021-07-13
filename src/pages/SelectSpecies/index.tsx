@@ -155,8 +155,3 @@ export function Selection({
     </>
   );
 }
-
-//todo: make every HTML element's ID UNIQUE!
-// i only make IDs so i can easily scan and see what
-// the element is for, since the classNames are reserved
-// for TailwindCSS styles

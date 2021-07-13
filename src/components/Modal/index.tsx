@@ -43,7 +43,6 @@ export default function Modal({
           />
           <div id="modal-pet-info" className="">
             <h2 className="text-xl font-bold">{name}</h2>
-            {/* <p>{species && species}</p> */}
             <p>
               {breeds &&
                 `${breeds.primary ? breeds.primary : "Unknown"} ${

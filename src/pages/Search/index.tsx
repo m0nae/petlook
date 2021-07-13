@@ -16,7 +16,6 @@ import {
 import chooseIcon from "../../utils/chooseIcon";
 import { Icon } from "@iconify/react";
 import SearchOptions from "../../components/SearchOptions";
-import Filter from "../../components/Filters";
 import DistanceInput from "../../components/DistanceInput";
 
 export default DataFetcher(SearchPage);
@@ -129,7 +128,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               onChange={(e: any) =>
                 searchDispatch({
                   type: "setDistance",
-                  payload: Number(e.target.value),
+                  payload: parseInt(e.target.value),
                 })
               }
             />

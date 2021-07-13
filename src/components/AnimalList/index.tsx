@@ -40,8 +40,8 @@ export default function AnimalList({
                 gender: animal.gender,
                 url: animal.url,
               }}
-              setSelectedPetId={setSelectedPetId}
-              setIsOpen={setIsOpen}
+              // setSelectedPetId={setSelectedPetId}
+              // setIsOpen={setIsOpen}
             />
           ))
         ) : (

@@ -4,9 +4,9 @@ export default function Card({
   image,
   name,
   info,
-  setIsOpen,
-  setSelectedPetId,
-}: InferProps<typeof Card.propTypes>) {
+}: // setIsOpen,
+// setSelectedPetId,
+InferProps<typeof Card.propTypes>) {
   let { breed } = info;
 
   if (!breed || breed === undefined) {
@@ -70,7 +70,7 @@ Card.propTypes = {
     age: PropTypes.string.isRequired,
     gender: PropTypes.string.isRequired,
   }).isRequired,
-  setIsOpen: PropTypes.func.isRequired,
+  // setIsOpen: PropTypes.func.isRequired,
   selectedPetId: PropTypes.number,
-  setSelectedPetId: PropTypes.func.isRequired,
+  // setSelectedPetId: PropTypes.func.isRequired,
 };
