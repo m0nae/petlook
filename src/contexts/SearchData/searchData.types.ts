@@ -26,7 +26,7 @@ export interface StateI {
 
 export type ActionsT =
   | { type: "setLocation"; payload: LocationI }
-  | { type: "setDistance"; payload: number | string }
+  | { type: "setDistance"; payload: number }
   | { type: "setSelectedSpecies"; payload: StateI["selectedSpecies"] }
   | { type: "setData"; payload: StateI["data"] }
   | { type: "setError"; payload: StateI["error"] };

@@ -68,11 +68,7 @@ function reducer(state: typeof initialState, action: ActionsT): StateI {
       return {
         ...state,
         distance:
-          action.payload < 0
-            ? 0
-            : action.payload > 500
-            ? 500
-            : Number(action.payload),
+          action.payload < 0 ? 0 : action.payload > 500 ? 500 : action.payload,
       };
 
     case "setSelectedSpecies":

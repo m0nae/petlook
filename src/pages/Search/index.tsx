@@ -128,7 +128,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               onChange={(e: any) =>
                 searchDispatch({
                   type: "setDistance",
-                  payload: Number(e.target.value),
+                  payload: parseInt(e.target.value),
                 })
               }
             />
