@@ -29,6 +29,7 @@ export default DataFetcher(SearchPage);
 
 function SearchPage({ handleSearch, loading, ...props }: any) {
   const {
+    data,
     location,
     lastSearchedLocation,
     distance,
@@ -270,7 +271,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
         ) : (
           <div className="grid grid-cols-2 mt-36 tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 xl:grid-cols-5 2xl:mx-10">
             <AnimalList
-              ctx={SearchDataContext}
+              data={data}
               setSelectedPetId={setSelectedPetId}
               setIsOpen={setIsOpen}
               loading={loading}

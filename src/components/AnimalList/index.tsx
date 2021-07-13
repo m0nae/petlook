@@ -11,14 +11,13 @@ export default function AnimalList({
   setIsOpen,
   ctx,
   loading,
+  data,
 }: any) {
-  const { data } = useContext(ctx);
-
   return (
     <>
       {loading ? (
         <div className="flex flex-col col-span-full items-center">
-          <div className="loader" />
+          <div className="loader" aria-label="loading" />
         </div>
       ) : data.animals ? (
         data.animals.length >= 1 ? (
