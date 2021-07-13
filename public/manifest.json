@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "PetLook",
+  "name": "PetLook",
+  "description": "Browse through adoptable pets and find your next furry friend.",
   "icons": [
     {
       "src": "favicon.ico",
