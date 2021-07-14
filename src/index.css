@@ -20,22 +20,6 @@ body {
   display: inline-block;
 }
 
-#miles-filter-container::after {
-  content: "miles";
-  font-weight: 400;
-  position: absolute;
-  top: 18%;
-  right: 1.4em;
-}
-
-#miles-filter-container-mobile::after {
-  content: "miles";
-  font-weight: 400;
-  position: absolute;
-  top: 25%;
-  right: 1.4em;
-}
-
 #pet-info {
   -webkit-line-clamp: 2;
   overflow: hidden;
