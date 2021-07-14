@@ -7,7 +7,7 @@ declare global {
 // this is the shape of the individual pet data that is returned
 // from the PetFinder API (minus the other properties that aren't
 // used in the site/codebase)
-interface Animal {
+export interface Animal {
   id: number;
   name: string;
   breeds: {
