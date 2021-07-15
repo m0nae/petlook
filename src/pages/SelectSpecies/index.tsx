@@ -3,10 +3,10 @@ import {
   SearchDataContext,
   SearchDataContextValue,
 } from "../../contexts/SearchData";
+import Selection from "../../components/Selection";
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
 import { parsedSpecies } from "../../utils/parsedSpecies";
 
-import { Icon } from "@iconify/react";
 import icon from "../../components/Icons";
 
 import NavButton from "../../components/NavButton";
@@ -49,48 +49,56 @@ export default function SelectSpecies() {
               text="Dog"
               icon={{ element: icon.dog }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="cat"
               text="Cat"
               icon={{ element: icon.cat }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="rabbit"
               text="Rabbit"
               icon={{ element: icon.rabbit }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="small & furry"
               text="Small & Furry"
               icon={{ element: icon.hamster }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="barnyard"
               text="Barnyard"
               icon={{ element: icon.pig }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="bird"
               text="Bird"
               icon={{ element: icon.bird }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="horse"
               text="Horse"
               icon={{ element: icon.horse }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="scales, fins, & other"
               text="Scales, Fins & Other"
               icon={{ element: icon.fish }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
           </div>
           <div id="nav-btn-container" className="flex justify-between mt-5">
@@ -106,51 +114,6 @@ export default function SelectSpecies() {
             </NavButton>
           </div>
         </div>
-      </div>
-    </>
-  );
-}
-
-type selectionProps = {
-  handleClick: (label: string, val: T.SPECIES) => void;
-  text: string;
-  selectionName: T.SPECIES;
-  icon: { element: any; width?: string; height?: string };
-};
-
-export function Selection({
-  handleClick,
-  text,
-  selectionName,
-  icon,
-}: selectionProps) {
-  const { selectedSpecies } = useContext(SearchDataContext);
-
-  // todo: clicking the btn doesn't select the actual radio btn. change this?
-  return (
-    <>
-      <div
-        className={`transform group mb-5 lg:mb-0 flex h-24 w-full rounded-md text-2xl px-[10%] items-center font-semibold hover:cursor-pointer transition-all duration-100 ${
-          selectedSpecies.value === selectionName
-            ? "bg-[#55d862] text-white shadow-active translate-y-1"
-            : "bg-white shadow-btn"
-        }`}
-        onClick={() => handleClick(text, selectionName)}
-        data-testid="selection"
-      >
-        <Icon
-          icon={icon.element}
-          height="3rem"
-          width="3rem"
-          className="mr-[1rem] mobile:mr-[2rem] sm:mr-[4rem] ml-7 min-h-[2.5rem] max-h-[2.5rem] max-w-[2.5rem] min-w-[2.5rem] mobile:min-h-[3rem] mobile:min-w-[3rem]"
-        />{" "}
-        <label
-          htmlFor="selection"
-          className="group-hover:cursor-pointer justify-self-center"
-        >
-          {text}
-        </label>
-        <input type="radio" className="hidden" />
       </div>
     </>
   );

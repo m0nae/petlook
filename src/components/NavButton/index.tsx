@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-interface NavBtnProps {
+export interface NavBtnProps {
   children: string;
   to: string;
   disabled?: boolean;
-  direction: string;
+  direction: "forward" | "back";
 }
 
 export default function NavButton({
@@ -28,6 +28,7 @@ export default function NavButton({
               viewBox="0 0 20 20"
               fill="currentColor"
             >
+              <title>Left Pointing Arrow</title>
               <path
                 fill-rule="evenodd"
                 d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
@@ -43,6 +44,7 @@ export default function NavButton({
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
+              <title>Right Pointing Arrow</title>
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -70,6 +72,7 @@ export default function NavButton({
             viewBox="0 0 20 20"
             fill="currentColor"
           >
+            <title>Left Pointing Arrow</title>
             <path
               fill-rule="evenodd"
               d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
@@ -85,6 +88,7 @@ export default function NavButton({
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
+            <title>Right Pointing Arrow</title>
             <path
               stroke-linecap="round"
               stroke-linejoin="round"

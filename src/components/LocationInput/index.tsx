@@ -1,24 +1,25 @@
-import { useContext, useState } from "react";
-import { SearchDataContext } from "../../contexts/SearchData";
+import { useState } from "react";
+import { LocationI } from "../../contexts/SearchData";
 import {
   customLocationExists,
   locationCoordinatesExist,
 } from "../../utils/locationExists";
 
-interface LocationInputProps {
+export interface LocationInputProps {
   locationInput: string;
+  location: LocationI;
+  lastSearchedLocation: LocationI;
   handleLocationInput: (e: any) => void;
-  defaultLocationText: string;
   className: string;
 }
 
 export default function LocationInput({
   locationInput,
   handleLocationInput,
-  defaultLocationText,
+  location,
+  lastSearchedLocation,
   className,
 }: LocationInputProps) {
-  const { location, lastSearchedLocation } = useContext(SearchDataContext);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   return (
@@ -30,7 +31,7 @@ export default function LocationInput({
           : location && customLocationExists(location) && !isInputFocused
           ? `${location.custom}`
           : location && locationCoordinatesExist(location) && !isInputFocused
-          ? defaultLocationText
+          ? "Your Location"
           : lastSearchedLocation &&
             customLocationExists(lastSearchedLocation) &&
             !isInputFocused

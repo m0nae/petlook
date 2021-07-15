@@ -1,20 +1,22 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen, fireEvent, userEvent } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { SearchDataProvider } from "../../contexts/SearchData";
 import Select from "./index";
 
-const renderUI = (ui, { providerProps, ...renderOptions }) => {
+type OptionsT = HTMLElement[] | (string | null)[];
+
+function renderUI(providerProps?: any) {
   return render(
-    <SearchDataProvider {...providerProps}>{ui}</SearchDataProvider>,
-    renderOptions
+    <SearchDataProvider {...providerProps}>
+      <Select />
+    </SearchDataProvider>
   );
-};
+}
 
 describe("the species select element", () => {
   beforeEach(() => {
-    renderUI(<Select />, {});
+    renderUI();
   });
 
   it("should render properly", () => {
@@ -26,7 +28,7 @@ describe("the species select element", () => {
     let select = screen.getByRole("combobox");
     fireEvent.click(select);
 
-    let options = await screen.findAllByRole("option");
+    let options: OptionsT = await screen.findAllByRole("option");
     let possibleSpecies = [
       "Barnyard Animals",
       "Small & Furries",
@@ -45,7 +47,7 @@ describe("the species select element", () => {
   });
 
   it("should render the correct icon depending on the selected species", async () => {
-    let rabbitOption = screen.getByRole("option", { name: "Rabbits" });
+    let rabbitOption = screen.getByRole("option", { name: /Rabbits/i });
 
     fireEvent.click(rabbitOption);
   });

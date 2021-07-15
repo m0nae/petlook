@@ -1,25 +1,45 @@
-export default function DistanceInput({ distance, onChange, className }: any) {
-  let classNames = ["p-2 rounded-sm", className]
-    .filter(Boolean)
-    .join(" ")
-    .trim();
+export default function DistanceInput({
+  distance,
+  onChange,
+  className,
+  width,
+}: any) {
+  let classNames = {
+    container: className
+      ? [
+          "flex bg-white items-center relative p-2",
+          className["container"],
+          width,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .trim()
+      : `flex bg-white items-center relative p-2 ${width ?? ""}`,
+    inputElement: className
+      ? ["w-full rounded-sm", className["inputElement"]]
+          .filter(Boolean)
+          .join(" ")
+          .trim()
+      : "w-full rounded-sm",
+  };
 
   return (
     <>
       <label htmlFor="miles-filter" className="hidden">
         Distance
       </label>
-      <input
-        id="miles-filter"
-        type="number"
-        min="0"
-        max="500"
-        value={distance}
-        className={
-          classNames && className ? classNames : "w-[120px] p-2 rounded-sm mr-3"
-        }
-        onChange={onChange}
-      />
+      <div className={classNames["container"]}>
+        <input
+          id="miles-filter"
+          type="number"
+          min="0"
+          max="500"
+          value={distance}
+          className={classNames["inputElement"]}
+          onChange={onChange}
+        />
+        <span className="absolute font-normal right-7">miles</span>
+      </div>
     </>
   );
 }

@@ -96,9 +96,10 @@ export default function SelectLocation() {
             >
               <icon.location customClass="h-16 w-16 self-center text-red-600 ml-3" />
               <LocationInput
+                location={location}
+                lastSearchedLocation={lastSearchedLocation}
                 locationInput={locationInput}
                 handleLocationInput={handleLocationInput}
-                defaultLocationText="Your Location"
                 className="text-3xl font-medium w-full h-full ml-4 rounded-md rounded-l-none"
               />
             </div>

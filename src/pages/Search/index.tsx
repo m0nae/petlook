@@ -29,6 +29,7 @@ export default DataFetcher(SearchPage);
 
 function SearchPage({ handleSearch, loading, ...props }: any) {
   const {
+    data,
     location,
     lastSearchedLocation,
     distance,
@@ -118,21 +119,20 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               selectElement: "w-full py-4 md:text-xl rounded-md shadow-sm",
             }}
           />
-          <div
-            id="miles-filter-container-mobile"
-            className="flex items-center text-xl font-medium self-center mt-3 shadow-sm mobile:mt-0"
-          >
-            <DistanceInput
-              className="w-[73vw] max-w-[345px] mobile:max-w-[160px] mobile:w-[35vw] py-4 pl-6 text-2xl rounded-md"
-              distance={distance}
-              onChange={(e: any) =>
-                searchDispatch({
-                  type: "setDistance",
-                  payload: parseInt(e.target.value),
-                })
-              }
-            />
-          </div>
+          <DistanceInput
+            width="w-[73vw] min-w-[150px] max-w-[345px] mobile:max-w-[160px] mobile:w-[35vw]"
+            className={{
+              container:
+                "mt-4 mobile:mt-0 py-[0.9rem] pl-6 text-2xl shadow-sm rounded-md",
+            }}
+            distance={distance}
+            onChange={(e: any) =>
+              searchDispatch({
+                type: "setDistance",
+                payload: parseInt(e.target.value),
+              })
+            }
+          />
         </div>
         <div
           id="location-input-container"
@@ -140,9 +140,10 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
         >
           <icon.location customClass="h-16 w-16 self-center text-red-600 ml-3" />
           <LocationInput
+            location={location}
+            lastSearchedLocation={lastSearchedLocation}
             locationInput={locationInput}
             handleLocationInput={handleLocationInput}
-            defaultLocationText="Your Location"
             className="text-3xl text-[#494352] font-medium w-full h-full ml-4 rounded-md rounded-l-none"
           />
         </div>
@@ -225,6 +226,10 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               className="flex text-xl font-medium self-center"
             >
               <DistanceInput
+                width="w-[140px]"
+                className={{
+                  container: "mr-2 rounded-sm",
+                }}
                 distance={distance}
                 onChange={(e: any) =>
                   searchDispatch({
@@ -240,7 +245,8 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               near
               <span className="ml-3 mr-3 self-center font-medium text-black">
                 <LocationInput
-                  defaultLocationText="Your Location"
+                  location={location}
+                  lastSearchedLocation={lastSearchedLocation}
                   handleLocationInput={handleLocationInput}
                   locationInput={locationInput}
                   className="w-[360px] rounded-sm p-2"
@@ -270,7 +276,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
         ) : (
           <div className="grid grid-cols-2 mt-36 tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 xl:grid-cols-5 2xl:mx-10">
             <AnimalList
-              ctx={SearchDataContext}
+              data={data}
               setSelectedPetId={setSelectedPetId}
               setIsOpen={setIsOpen}
               loading={loading}

@@ -11,31 +11,27 @@ export default function AnimalList({
   setIsOpen,
   ctx,
   loading,
+  data,
 }: any) {
-  const { data } = useContext(ctx);
-
   return (
     <>
       {loading ? (
         <div className="flex flex-col col-span-full items-center">
-          <div className="loader" />
+          <div className="loader" aria-label="loading" />
         </div>
       ) : data.animals ? (
         data.animals.length >= 1 ? (
           data.animals.map((animal: any) => (
             <Card
               key={animal.id}
-              image={
-                animal.photos[0]
-                  ? animal.photos[0].large
-                  : "https://www.freeiconspng.com/uploads/no-image-icon-8.png"
-              }
+              image={animal.photos[0]}
               name={animal.name}
               info={{
                 id: animal.id,
-                breed: `${
-                  animal.breeds.primary ? animal.breeds.primary : "Unknown"
-                } ${animal.breeds.mixed ? "Mix" : ""}`,
+                breed: {
+                  primary: animal.breeds.primary,
+                  mixed: animal.breeds.mixed,
+                },
                 age: animal.age,
                 gender: animal.gender,
                 url: animal.url,

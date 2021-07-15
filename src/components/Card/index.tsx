@@ -8,9 +8,21 @@ export default function Card({
 // setSelectedPetId,
 InferProps<typeof Card.propTypes>) {
   let { breed } = info;
+  image = image
+    ? (image as { large: string }).large
+    : "https://www.freeiconspng.com/uploads/no-image-icon-8.png";
 
   if (!breed || breed === undefined) {
     breed = "Unknown";
+    info = {
+      ...info,
+      breed,
+    };
+  } else {
+    breed = `${breed.primary ? breed.primary : "Unknown"} ${
+      breed.mixed ? "Mix" : ""
+    }`;
+
     info = {
       ...info,
       breed,
@@ -34,7 +46,7 @@ InferProps<typeof Card.propTypes>) {
         <div className="w-[100%] mobile:w-[100%] lg:max-w-sm xl:max-w-lg rounded-xl overflow-hidden border-2 border-gray-100">
           <img
             className="w-full object-cover h-[45vw] mobile:h-[200px] sm:h-[220px] md:h-[200px] lg:max-h-[150px] lg:min-h-[150px] xl:max-h-[225px] 2xl:min-h-[250px]"
-            src={image}
+            src={image as string}
             alt={name}
           />
           <div
@@ -61,11 +73,16 @@ InferProps<typeof Card.propTypes>) {
 }
 
 Card.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.shape({
+    large: PropTypes.string,
+  }),
   name: PropTypes.string.isRequired,
   info: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    breed: PropTypes.string.isRequired,
+    breed: PropTypes.shape({
+      primary: PropTypes.string,
+      mixed: PropTypes.bool,
+    }),
     url: PropTypes.string.isRequired,
     age: PropTypes.string.isRequired,
     gender: PropTypes.string.isRequired,
