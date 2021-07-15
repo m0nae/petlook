@@ -2,6 +2,7 @@ import { useContext } from "react";
 import {
   SearchDataContext,
   SearchDataContextValue,
+  StateI,
 } from "../../contexts/SearchData";
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
 import { parsedSpecies } from "../../utils/parsedSpecies";
@@ -49,48 +50,56 @@ export default function SelectSpecies() {
               text="Dog"
               icon={{ element: icon.dog }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="cat"
               text="Cat"
               icon={{ element: icon.cat }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="rabbit"
               text="Rabbit"
               icon={{ element: icon.rabbit }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="small & furry"
               text="Small & Furry"
               icon={{ element: icon.hamster }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="barnyard"
               text="Barnyard"
               icon={{ element: icon.pig }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="bird"
               text="Bird"
               icon={{ element: icon.bird }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="horse"
               text="Horse"
               icon={{ element: icon.horse }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
             <Selection
               selectionName="scales, fins, & other"
               text="Scales, Fins & Other"
               icon={{ element: icon.fish }}
               handleClick={handleClick}
+              selectedSpecies={selectedSpecies}
             />
           </div>
           <div id="nav-btn-container" className="flex justify-between mt-5">
@@ -111,11 +120,12 @@ export default function SelectSpecies() {
   );
 }
 
-type selectionProps = {
+export type SelectionProps = {
   handleClick: (label: string, val: T.SPECIES) => void;
   text: string;
   selectionName: T.SPECIES;
   icon: { element: any; width?: string; height?: string };
+  selectedSpecies: StateI["selectedSpecies"];
 };
 
 export function Selection({
@@ -123,9 +133,8 @@ export function Selection({
   text,
   selectionName,
   icon,
-}: selectionProps) {
-  const { selectedSpecies } = useContext(SearchDataContext);
-
+  selectedSpecies,
+}: SelectionProps) {
   // todo: clicking the btn doesn't select the actual radio btn. change this?
   return (
     <>
