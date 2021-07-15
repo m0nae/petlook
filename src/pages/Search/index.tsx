@@ -140,9 +140,10 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
         >
           <icon.location customClass="h-16 w-16 self-center text-red-600 ml-3" />
           <LocationInput
+            location={location}
+            lastSearchedLocation={lastSearchedLocation}
             locationInput={locationInput}
             handleLocationInput={handleLocationInput}
-            defaultLocationText="Your Location"
             className="text-3xl text-[#494352] font-medium w-full h-full ml-4 rounded-md rounded-l-none"
           />
         </div>
@@ -244,7 +245,8 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               near
               <span className="ml-3 mr-3 self-center font-medium text-black">
                 <LocationInput
-                  defaultLocationText="Your Location"
+                  location={location}
+                  lastSearchedLocation={lastSearchedLocation}
                   handleLocationInput={handleLocationInput}
                   locationInput={locationInput}
                   className="w-[360px] rounded-sm p-2"
