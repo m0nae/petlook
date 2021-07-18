@@ -6,6 +6,7 @@ import birdIcon from "@iconify-icons/twemoji/bird";
 import rabbitFace from "@iconify-icons/noto/rabbit-face";
 import hamsterIcon from "@iconify-icons/noto/hamster";
 import fishIcon from "@iconify-icons/noto/fish";
+import pawPrints from "@iconify-icons/twemoji/paw-prints";
 
 interface LocationIconProps {
   customClass: string;
@@ -40,5 +41,6 @@ const icons = {
   hamster: hamsterIcon,
   fish: fishIcon,
   location: LocationIcon,
+  paws: pawPrints,
 };
 export default icons;
