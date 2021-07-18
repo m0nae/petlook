@@ -5,7 +5,7 @@ import icon from "../../components/Icons";
 export default function NotFound() {
   return (
     <div className="flex items-center min-h-screen min-w-full bg-purple-600 dark:bg-gray-800 ">
-      <div className="flex flex-col md:text-center w-[90%] mobile:w-4/5 max-w-screen-md mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
+      <div className="flex flex-col md:text-center w-[90%] mobile:w-4/5 max-w-screen-lg mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
         <h2 className="font-extrabold text-white dark:text-white mobile:text-4xl">
           <span className="block text-[2.5rem] leading-none mobile:text-5xl sm:text-6xl">
             Whoops! Page not found.
