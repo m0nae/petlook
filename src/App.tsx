@@ -4,6 +4,7 @@ import SelectSpecies from "./pages/SelectSpecies";
 import { SearchDataProvider } from "./contexts/SearchData";
 import SelectLocation from "./pages/SelectLocation";
 import Landing from "./pages/Landing";
+import NotFound from "./pages/404";
 
 function App() {
   return (
@@ -19,8 +20,11 @@ function App() {
           <Route path="/select-species">
             <SelectSpecies />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Landing />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       </Router>
