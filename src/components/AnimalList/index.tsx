@@ -1,18 +1,20 @@
-import { useContext } from "react";
 import Card from "../Card";
 import cryingCat from "@iconify-icons/twemoji/crying-cat";
 import { Icon } from "@iconify/react";
+import { DataI } from "../../contexts/SearchData";
+import { Animal } from "../../setupTests";
 
-// todo: give the props an actual type
-// interface AnimalListProps {}
+type AnimalListProps = {
+  loading: boolean;
+  data: DataI;
+};
 
 export default function AnimalList({
-  setSelectedPetId,
-  setIsOpen,
-  ctx,
   loading,
   data,
-}: any) {
+}: // setIsOpen,
+// setSelectedPetId
+AnimalListProps) {
   return (
     <>
       {loading ? (
@@ -21,7 +23,7 @@ export default function AnimalList({
         </div>
       ) : data.animals ? (
         data.animals.length >= 1 ? (
-          data.animals.map((animal: any) => (
+          data.animals.map((animal: Animal) => (
             <Card
               key={animal.id}
               image={animal.photos[0]}

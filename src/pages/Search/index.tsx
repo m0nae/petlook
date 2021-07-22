@@ -20,14 +20,13 @@ import DistanceInput from "../../components/DistanceInput";
 
 export default DataFetcher(SearchPage);
 
-// todo: FIX THIS, GIVE EVERYTHING A PROPER TYPE
-// AND NOT JUST "ANY"!!!
+interface SearchPageProps {
+  handleSearch: () => void;
+  loading: boolean;
+  props: any[];
+}
 
-// interface SearchComponentProps {
-//   handleSearch: () => void;
-// }
-
-function SearchPage({ handleSearch, loading, ...props }: any) {
+function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
   const {
     data,
     location,
@@ -42,8 +41,8 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
   // const [page, setPage] = useState(1);
   const [displayMobileSearch, setDisplayMobileSearch] = useState(false);
   const [locationInput, setLocationInput] = useState("");
-  const [setIsOpen] = useState(false);
-  const [setSelectedPetId] = useState();
+  // const [setIsOpen] = useState(false);
+  // const [setSelectedPetId] = useState();
   // const [searchFilters, setSearchFilters] = useState({});
 
   const handleLocationInput = (e: any) => {
@@ -277,8 +276,8 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
           <div className="grid grid-cols-2 mt-36 tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 xl:grid-cols-5 2xl:mx-10">
             <AnimalList
               data={data}
-              setSelectedPetId={setSelectedPetId}
-              setIsOpen={setIsOpen}
+              // setSelectedPetId={setSelectedPetId}
+              // setIsOpen={setIsOpen}
               loading={loading}
             />
           </div>

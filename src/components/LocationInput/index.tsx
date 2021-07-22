@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { LocationI } from "../../contexts/SearchData";
 import {
   customLocationExists,
@@ -9,7 +9,7 @@ export interface LocationInputProps {
   locationInput: string;
   location: LocationI;
   lastSearchedLocation: LocationI;
-  handleLocationInput: (e: any) => void;
+  handleLocationInput: (e: SyntheticEvent) => void;
   className: string;
 }
 
