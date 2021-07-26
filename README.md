@@ -43,6 +43,7 @@
 
 # :computer: Tech Used
 * React
+* React Router
 * Context API
     <details><summary>Why Context?</summary>The Context API seemed very fitting. This project isn't complex enough, in my opinion, to need *global* state management.
 
