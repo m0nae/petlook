@@ -9,7 +9,14 @@ import Icon from "@iconify/react";
 import { parsedSpecies } from "../../utils/parsedSpecies";
 import chooseIcon from "../../utils/chooseIcon";
 
-export default function Select({ className }: any) {
+interface SelectProps {
+  className?: {
+    container?: string;
+    selectElement?: string;
+  };
+}
+
+export default function Select({ className }: SelectProps) {
   const { selectedSpecies, searchDispatch } = useContext(SearchDataContext);
 
   useEffect(() => {

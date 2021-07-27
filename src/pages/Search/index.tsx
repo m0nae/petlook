@@ -20,14 +20,13 @@ import DistanceInput from "../../components/DistanceInput";
 
 export default DataFetcher(SearchPage);
 
-// todo: FIX THIS, GIVE EVERYTHING A PROPER TYPE
-// AND NOT JUST "ANY"!!!
+interface SearchPageProps {
+  handleSearch: () => void;
+  loading: boolean;
+  props: any[];
+}
 
-// interface SearchComponentProps {
-//   handleSearch: () => void;
-// }
-
-function SearchPage({ handleSearch, loading, ...props }: any) {
+function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
   const {
     data,
     location,
@@ -42,8 +41,8 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
   // const [page, setPage] = useState(1);
   const [displayMobileSearch, setDisplayMobileSearch] = useState(false);
   const [locationInput, setLocationInput] = useState("");
-  const [setIsOpen] = useState(false);
-  const [setSelectedPetId] = useState();
+  // const [setIsOpen] = useState(false);
+  // const [setSelectedPetId] = useState();
   // const [searchFilters, setSearchFilters] = useState({});
 
   const handleLocationInput = (e: any) => {
@@ -89,7 +88,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
             : "hidden"
         }
       >
-        <span
+        <button
           id="exit-mobile-search-display"
           className="absolute top-3 right-4 font-extrabold hover:cursor-pointer"
           onClick={() => setDisplayMobileSearch(false)}
@@ -108,7 +107,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               strokeWidth="1.6px"
             />
           </svg>
-        </span>
+        </button>
         <div
           id="species-and-distance"
           className="flex flex-col mobile:flex-row items-center mobile:w-[80%]"
@@ -192,7 +191,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
                 ? `${lastSearchedLocation.custom}`
                 : ""}
             </p>
-            <span
+            <button
               id="pencil-icon"
               className="hover:cursor-pointer ml-3"
               onClick={() => setDisplayMobileSearch(true)}
@@ -205,7 +204,7 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
               >
                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
               </svg>
-            </span>
+            </button>
           </div>
           <div id="top-search-container" className="hidden 1135:flex">
             <div
@@ -277,8 +276,8 @@ function SearchPage({ handleSearch, loading, ...props }: any) {
           <div className="grid grid-cols-2 mt-36 tablet:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 xl:grid-cols-5 2xl:mx-10">
             <AnimalList
               data={data}
-              setSelectedPetId={setSelectedPetId}
-              setIsOpen={setIsOpen}
+              // setSelectedPetId={setSelectedPetId}
+              // setIsOpen={setIsOpen}
               loading={loading}
             />
           </div>

@@ -1,7 +1,12 @@
 import React, { createContext, useReducer } from "react";
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
 import { parseLocation } from "../../utils/parseLocation";
-import { StateI, ActionsT, SearchDataContextValue } from "./searchData.types";
+import {
+  StateI,
+  ActionsT,
+  SearchDataContextValue,
+  DataI,
+} from "./searchData.types";
 
 export * from "./searchData.types";
 
@@ -51,7 +56,7 @@ const initialState: StateI = {
     value: "" as T.SPECIES,
   },
   data: {
-    animals: undefined,
+    animals: undefined as DataI["animals"],
   },
   error: false,
 };

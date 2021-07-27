@@ -16,8 +16,9 @@ export default function NavButton({
   if (disabled) {
     return (
       <button
+        tabIndex={0}
         className="px-10 mobile:px-14 sm:px-20 py-4 hover:cursor-default bg-gray-400 font-semibold text-white text-2xl rounded-md"
-        disabled
+        aria-disabled
       >
         <span className="hidden mobile:block">{children}</span>
         <span className="mobile:hidden">
@@ -61,6 +62,7 @@ export default function NavButton({
   return (
     <Link
       to={to}
+      role="button"
       className="px-10 mobile:px-14 sm:px-20 py-4 bg-blue-500 font-semibold text-white text-2xl rounded-md"
     >
       <span className="hidden mobile:block">{children}</span>

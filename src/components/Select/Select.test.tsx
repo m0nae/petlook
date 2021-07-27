@@ -6,9 +6,9 @@ import Select from "./index";
 
 type OptionsT = HTMLElement[] | (string | null)[];
 
-function renderUI(providerProps?: any) {
+function renderUI() {
   return render(
-    <SearchDataProvider {...providerProps}>
+    <SearchDataProvider>
       <Select />
     </SearchDataProvider>
   );

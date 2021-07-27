@@ -35,10 +35,10 @@ export default function SelectSpecies() {
       <div className="min-h-screen min-w-full bg-gradient-to-r from-purple-600 to-purple-700 font-Poppins">
         <div
           id="select-species-container"
-          className="pt-[10vh] pb-[10vh] lg:pt-[20vh] mx-[10%] md:mx-[20%] max-w-screen-lg"
+          className="pt-[10vh] pb-[10vh] lg:pt-[20vh] mx-[10%] md:mx-[20%] 2xl:mx-auto max-w-screen-lg"
         >
           <h1 className="text-6xl font-semibold text-white text-center">
-            Select a species
+            Choose a Species
           </h1>
           <div
             id="select-species-options"

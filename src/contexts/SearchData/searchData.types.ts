@@ -1,4 +1,5 @@
 import { SearchOptionTypes as T } from "../../components/Option/option.types";
+import { Animal } from "../../setupTests";
 
 export interface LocationI {
   coordinates?: {
@@ -9,7 +10,7 @@ export interface LocationI {
 }
 
 export interface DataI {
-  animals: [] | undefined;
+  animals: Partial<Animal>[] & [];
 }
 
 export interface StateI {

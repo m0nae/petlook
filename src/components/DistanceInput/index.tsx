@@ -1,9 +1,23 @@
+import { FormEventHandler } from "react";
+
+interface ClassNameI {
+  container?: string;
+  inputElement?: string;
+}
+
+type DistanceInputProps = {
+  distance: number;
+  onChange: FormEventHandler;
+  className: ClassNameI;
+  width: string;
+};
+
 export default function DistanceInput({
   distance,
   onChange,
   className,
   width,
-}: any) {
+}: DistanceInputProps) {
   let classNames = {
     container: className
       ? [
