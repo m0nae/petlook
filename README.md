@@ -18,9 +18,9 @@
 </details>
 
 <details>
-  <summary>Select species page</summary>
-  <img src="https://user-images.githubusercontent.com/74229895/127043830-957c749c-b847-48da-a32f-59f84352b7b6.png" />
-  <img src="https://user-images.githubusercontent.com/74229895/127043875-d6e0789d-c4aa-4d5f-b15c-bae4e1b69933.png" />
+  <summary>Choose species page</summary>
+  <img src="https://user-images.githubusercontent.com/74229895/127210988-0d067320-2ed4-4689-97e5-7f8e15435919.png" />
+  <img src="https://user-images.githubusercontent.com/74229895/127211057-03bb77d9-1f8d-4a4f-9cce-875bd9559166.png" />
 </details>
 
 <details>
