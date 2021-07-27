@@ -88,7 +88,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
             : "hidden"
         }
       >
-        <span
+        <button
           id="exit-mobile-search-display"
           className="absolute top-3 right-4 font-extrabold hover:cursor-pointer"
           onClick={() => setDisplayMobileSearch(false)}
@@ -107,7 +107,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
               strokeWidth="1.6px"
             />
           </svg>
-        </span>
+        </button>
         <div
           id="species-and-distance"
           className="flex flex-col mobile:flex-row items-center mobile:w-[80%]"
@@ -191,7 +191,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
                 ? `${lastSearchedLocation.custom}`
                 : ""}
             </p>
-            <span
+            <button
               id="pencil-icon"
               className="hover:cursor-pointer ml-3"
               onClick={() => setDisplayMobileSearch(true)}
@@ -204,7 +204,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
               >
                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
               </svg>
-            </span>
+            </button>
           </div>
           <div id="top-search-container" className="hidden 1135:flex">
             <div
