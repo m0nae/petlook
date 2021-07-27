@@ -38,7 +38,7 @@ export default function SelectSpecies() {
           className="pt-[10vh] pb-[10vh] lg:pt-[20vh] mx-[10%] md:mx-[20%] max-w-screen-lg"
         >
           <h1 className="text-6xl font-semibold text-white text-center">
-            Select a species
+            Choose a Species
           </h1>
           <div
             id="select-species-options"
