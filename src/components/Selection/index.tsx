@@ -28,6 +28,7 @@ export default function Selection({
         }`}
         onClick={() => handleClick(text, selectionName)}
         data-testid="selection"
+        data-cy={`${selectionName}-selection`}
       >
         <Icon
           icon={icon.element}
@@ -41,7 +42,7 @@ export default function Selection({
         >
           {text}
         </label>
-        <input type="radio" className="hidden" />
+        <input type="radio" className="hidden" data-cy={`${selectionName}-selection-input`} />
       </div>
     </>
   );

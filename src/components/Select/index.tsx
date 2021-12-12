@@ -14,9 +14,10 @@ interface SelectProps {
     container?: string;
     selectElement?: string;
   };
+  dataCy?: string;
 }
 
-export default function Select({ className }: SelectProps) {
+export default function Select({ className, dataCy }: SelectProps) {
   const { selectedSpecies, searchDispatch } = useContext(SearchDataContext);
 
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function Select({ className }: SelectProps) {
       )}
       <select
         name="species"
+        data-cy={dataCy}
         className={classNames["selectElement"]}
         onChange={(e) => {
           let selected = e.target.value;

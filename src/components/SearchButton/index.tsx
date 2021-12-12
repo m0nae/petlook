@@ -5,11 +5,13 @@ interface SearchButtonProps {
   className: string;
   type?: string;
   onClick: FormEventHandler;
+  dataCy?: string;
 }
 
 export default function SearchButton({
   children,
   className,
+  dataCy,
   ...props
 }: SearchButtonProps) {
   let classNames = [
@@ -20,7 +22,7 @@ export default function SearchButton({
     .join(" ")
     .trim();
   return (
-    <button {...props} type="submit" className={classNames}>
+    <button {...props} type="submit" className={classNames} data-cy={dataCy}>
       {children}
     </button>
   );

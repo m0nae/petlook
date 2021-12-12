@@ -42,6 +42,7 @@ export default function LocationInput({
       onFocus={() => setIsInputFocused(true)}
       onBlur={() => setIsInputFocused(false)}
       placeholder="City, State; State; or Zip Code"
+      data-cy="location-input"
       className={className}
     />
   );

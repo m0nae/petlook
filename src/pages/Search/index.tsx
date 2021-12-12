@@ -124,6 +124,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
               container:
                 "mt-4 mobile:mt-0 py-[0.9rem] pl-6 text-2xl shadow-sm rounded-md",
             }}
+            dataCy="distance-input-mobile"
             distance={distance}
             onChange={(e: any) =>
               searchDispatch({
@@ -153,6 +154,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
             setDisplayMobileSearch(false);
           }}
           className="py-7 w-[80%] text-3xl"
+          dataCy="search-button-mobile"
         >
           Search
         </SearchButton>{" "}
@@ -195,6 +197,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
               id="pencil-icon"
               className="hover:cursor-pointer ml-3"
               onClick={() => setDisplayMobileSearch(true)}
+              data-cy="pencil-icon"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -213,6 +216,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
             >
               <span className="text-2xl font-medium ml-3">
                 <Select
+                  dataCy="species-select"
                   className={{
                     selectElement:
                       "w-[200px] bg-purple-600 text-white focus-within:text-black focus-within:bg-white",
@@ -229,6 +233,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
                 className={{
                   container: "mr-2 rounded-sm",
                 }}
+                dataCy="distance-input-desktop"
                 distance={distance}
                 onChange={(e: any) =>
                   searchDispatch({
@@ -257,6 +262,7 @@ function SearchPage({ handleSearch, loading, ...props }: SearchPageProps) {
             <SearchButton
               onClick={() => handleSearch()}
               className="py-3 text-lg mr-4"
+              dataCy="search-button-desktop"
             >
               Search
             </SearchButton>{" "}

@@ -10,6 +10,7 @@ type DistanceInputProps = {
   onChange: FormEventHandler;
   className: ClassNameI;
   width: string;
+  dataCy?: string;
 };
 
 export default function DistanceInput({
@@ -17,6 +18,7 @@ export default function DistanceInput({
   onChange,
   className,
   width,
+  dataCy
 }: DistanceInputProps) {
   let classNames = {
     container: className
@@ -45,6 +47,7 @@ export default function DistanceInput({
       <div className={classNames["container"]}>
         <input
           id="miles-filter"
+          data-cy={dataCy}
           type="number"
           min="0"
           max="500"

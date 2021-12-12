@@ -19,6 +19,7 @@ export default function NavButton({
         tabIndex={0}
         className="px-10 mobile:px-14 sm:px-20 py-4 hover:cursor-default bg-gray-400 font-semibold text-white text-2xl rounded-md"
         aria-disabled
+        data-cy={direction === "back" ? "back-button-disabled" : "next-button-disabled"}
       >
         <span className="hidden mobile:block">{children}</span>
         <span className="mobile:hidden">
@@ -64,6 +65,7 @@ export default function NavButton({
       to={to}
       role="button"
       className="px-10 mobile:px-14 sm:px-20 py-4 bg-blue-500 font-semibold text-white text-2xl rounded-md"
+      data-cy={direction === "back" ? "back-button" : "next-button"}
     >
       <span className="hidden mobile:block">{children}</span>
       <span className="mobile:hidden">

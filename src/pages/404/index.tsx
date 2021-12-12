@@ -24,6 +24,7 @@ export default function NotFound() {
         <Link
           to="/"
           className="transform bg-[#00a9f0] text-white hover:shadow-landingActive hover:translate-y-1 transition-all duration-100 hover:cursor-pointer shadow-landing text-center text-4xl mobile:text-5xl font-semibold rounded-lg tiny:px-10 mobile:px-16 py-8 sm:py-12 mt-10 mb-10 sm:mt-20"
+          data-cy="home-button"
         >
           Home
         </Link>
