@@ -13,7 +13,7 @@ export default function Landing() {
         <div className="flex flex-col justify-items-center items-center">
           <div className="flex flex-col mt-5 w-[90%] max-w-5xl">
             <h1 className="text-[3.8rem] tiny:text-[4.2rem] mobile:text-[6rem] sm:text-[8rem] lg:text-[9rem] font-bold text-white text-center pt-8 ">
-              <span className="inline-block">PetL{eyes}k</span>
+              <span className="inline-block">Petlook Preview!</span>
             </h1>
             <p className="text-3xl mobile:text-4xl text-white font-medium mt-4 mx-4">
               Browse through a selection of adoptable pets and find your next
