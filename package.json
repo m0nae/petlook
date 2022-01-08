@@ -40,6 +40,9 @@
     "globals": {
       "DATA": "readonly"
     },
+    "rules": {
+      "no-unused-vars": ["error"]
+    },
     "extends": [
       "react-app",
       "react-app/jest"
