@@ -17,7 +17,7 @@ export default function Landing() {
             </h1>
             <p className="text-3xl mobile:text-4xl text-white font-medium mt-4 mx-4">
               Browse through a selection of adoptable pets and find your next
-              furry friend.
+              furry friend. A small change.
             </p>
             <Link
               to="/select-species"
